@@ -8,9 +8,15 @@
         Title="Items" Height="450" Width="800">
     <Grid>
         <DataGrid Name="ItemDescTableDataGrid" HorizontalAlignment="Left" Height="345" Margin="52,26,0,0" VerticalAlignment="Top" Width="335"/>
-        <Button Name="addItemButton" Content="Add Item" HorizontalAlignment="Left" Margin="449,174,0,0" VerticalAlignment="Top" Width="75" Height="30"/>
-        <Button Name="editItemButton" Content="Edit Item" HorizontalAlignment="Left" Margin="449,231,0,0" VerticalAlignment="Top" Width="75" Height="30"/>
-        <Button Name="deleteItembutton" Content="Delete Item" HorizontalAlignment="Left" Margin="580,174,0,0" VerticalAlignment="Top" Width="75" Height="30"/>
+        <Button Name="addItemButton" Content="Add Item" HorizontalAlignment="Left" Margin="676,256,0,0" VerticalAlignment="Top" Width="75" Height="30" RenderTransformOrigin="2.061,3.771"/>
+        <Button Name="editItemButton" Content="Edit Item" HorizontalAlignment="Left" Margin="676,329,0,0" VerticalAlignment="Top" Width="75" Height="30"/>
+        <Button Name="deleteItembutton" Content="Delete Item" HorizontalAlignment="Left" Margin="541,329,0,0" VerticalAlignment="Top" Width="75" Height="30"/>
+        <TextBox Name="itemCodeText" HorizontalAlignment="Left" Height="23" Margin="631,58,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="itemCostText" HorizontalAlignment="Left" Height="23" Margin="631,182,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="itemDescText" HorizontalAlignment="Left" Height="23" Margin="631,120,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Item Name:" HorizontalAlignment="Left" Margin="504,63,0,0" VerticalAlignment="Top"/>
+        <Label Content="Item Description:" HorizontalAlignment="Left" Margin="476,125,0,0" VerticalAlignment="Top"/>
+        <Label Content="Item Cost:" HorizontalAlignment="Left" Margin="512,179,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

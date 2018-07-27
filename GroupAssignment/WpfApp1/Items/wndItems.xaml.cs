@@ -22,22 +22,30 @@ namespace GroupAssignment
     public partial class wndItems : Window
     {
         clsItemsSQL myDBLibrary;
+        clsItemsLogic myLogic;
+
+        List<Item> itemList;
         public wndItems()
         {
             InitializeComponent();
             myDBLibrary = new clsItemsSQL();
+            myLogic = new clsItemsLogic();
+            itemList = new List<Item>();
+            itemList = myLogic.getItems();
+
+            ItemDescTableDataGrid.CanUserAddRows = false;
+
+            
 
             gui();
 
-            test();
+            //test();
         }
 
         void gui()
         {
-            int rowsAffected = 0;
-            DataSet myData = myDBLibrary.DisplayItemDescTable(ref rowsAffected);
-            ItemDescTableDataGrid.DataContext = myData;
             
+
         }
 
 
@@ -46,7 +54,7 @@ namespace GroupAssignment
         /// </summary>
         void test()
         {
-            myDBLibrary.AddItem("AA", "Test", 100.3553);
+            myDBLibrary.AddItem("AA", "Test", 100.35);
             myDBLibrary.UpdateItem("AA", "TestUpdate", 50);
             myDBLibrary.DeleteItem("AA");
 

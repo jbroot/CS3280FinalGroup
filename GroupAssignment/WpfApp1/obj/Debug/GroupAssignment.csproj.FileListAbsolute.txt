@@ -15,3 +15,5 @@ C:\Users\j\Documents\school\CS3280\GroupAssignment\WpfApp1\obj\Debug\WpfApp1.Pro
 C:\Users\j\Documents\school\CS3280\GroupAssignment\WpfApp1\obj\Debug\GroupAssignment.csproj.GenerateResource.cache
 C:\Users\j\Documents\school\CS3280\GroupAssignment\WpfApp1\obj\Debug\GroupAssignment.csproj.CoreCompileInputs.cache
 C:\Users\j\Documents\school\CS3280\GroupAssignment\WpfApp1\obj\Debug\GroupAssignment.csprojAssemblyReference.cache
+C:\Users\j\Documents\school\CS3280\GroupAssignment\WpfApp1\obj\Debug\Search\wndSearch.g.cs
+C:\Users\j\Documents\school\CS3280\GroupAssignment\WpfApp1\obj\Debug\Search\wndSearch.baml
