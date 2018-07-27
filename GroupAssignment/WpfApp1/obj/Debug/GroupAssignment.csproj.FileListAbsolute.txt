@@ -1,0 +1,16 @@
+C:\Users\j\Documents\school\CS3280\GroupAssignment\WpfApp1\obj\Debug\Items\wndItems.g.cs
+C:\Users\j\Documents\school\CS3280\GroupAssignment\WpfApp1\obj\Debug\Main\wndMain.g.cs
+C:\Users\j\Documents\school\CS3280\GroupAssignment\WpfApp1\obj\Debug\App.g.cs
+C:\Users\j\Documents\school\CS3280\GroupAssignment\WpfApp1\obj\Debug\WpfApp1_MarkupCompile.cache
+C:\Users\j\Documents\school\CS3280\GroupAssignment\WpfApp1\obj\Debug\WpfApp1_MarkupCompile.lref
+C:\Users\j\Documents\school\CS3280\GroupAssignment\WpfApp1\obj\Debug\WpfApp1.exe
+C:\Users\j\Documents\school\CS3280\GroupAssignment\WpfApp1\obj\Debug\WpfApp1.pdb
+C:\Users\j\Documents\school\CS3280\GroupAssignment\WpfApp1\bin\Debug\WpfApp1.exe.config
+C:\Users\j\Documents\school\CS3280\GroupAssignment\WpfApp1\bin\Debug\WpfApp1.exe
+C:\Users\j\Documents\school\CS3280\GroupAssignment\WpfApp1\bin\Debug\WpfApp1.pdb
+C:\Users\j\Documents\school\CS3280\GroupAssignment\WpfApp1\obj\Debug\Main\wndMain.baml
+C:\Users\j\Documents\school\CS3280\GroupAssignment\WpfApp1\obj\Debug\Items\wndItems.baml
+C:\Users\j\Documents\school\CS3280\GroupAssignment\WpfApp1\obj\Debug\WpfApp1.g.resources
+C:\Users\j\Documents\school\CS3280\GroupAssignment\WpfApp1\obj\Debug\WpfApp1.Properties.Resources.resources
+C:\Users\j\Documents\school\CS3280\GroupAssignment\WpfApp1\obj\Debug\GroupAssignment.csproj.GenerateResource.cache
+C:\Users\j\Documents\school\CS3280\GroupAssignment\WpfApp1\obj\Debug\GroupAssignment.csproj.CoreCompileInputs.cache
