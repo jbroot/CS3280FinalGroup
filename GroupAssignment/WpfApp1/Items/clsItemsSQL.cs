@@ -1,150 +1,102 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
-using System.Data.OleDb;
-using System.IO;
+using System.Linq;
 using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
 
-/// <summary>
-/// Class used to access the database.
-/// </summary>
-public class clsItemsSQL
+namespace GroupAssignment
 {
-    /// <summary>
-    /// Connection string to the database.
-    /// </summary>
-    private string sConnectionString;
-
-    /// <summary>
-    /// Constructor that sets the connection string to the database
-    /// </summary>
-    public clsItemsSQL()
+    public class clsItemsSQL
     {
-        sConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data source= " + Directory.GetCurrentDirectory() + "\\Invoice.mdb";
-    }
+        ConnectDB db;
 
-    /// <summary>
-    /// This method takes an SQL statment that is passed in and executes it.  The resulting values
-    /// are returned in a DataSet.  The number of rows returned from the query will be put into
-    /// the reference parameter iRetVal.
-    /// </summary>
-    /// <param name="sSQL">The SQL statement to be executed.</param>
-    /// <param name="iRetVal">Reference parameter that returns the number of selected rows.</param>
-    /// <returns>Returns a DataSet that contains the data from the SQL statement.</returns>
-    public DataSet ExecuteSQLStatement(string sSQL, ref int iRetVal)
-    {
-        try
+        public clsItemsSQL()
         {
-            //Create a new DataSet
-            DataSet ds = new DataSet();
+            db = new ConnectDB();
+        }
 
-            using (OleDbConnection conn = new OleDbConnection(sConnectionString))
+        /// <summary>
+        /// Adds an Item to the database
+        /// </summary>
+        /// <param name="pKey"></param>
+        /// <param name="ItemDesc"></param>
+        /// <param name="cost"></param>
+        /// <returns>Number of rows affected or -1 if the pKey is already used</returns>
+        public int AddItem(string pKey, string ItemDesc, double cost)
+        {
+            try
             {
-                using (OleDbDataAdapter adapter = new OleDbDataAdapter())
+                string result = db.ExecuteScalarSQL("SELECT * FROM ItemDesc WHERE ItemCode = '" + pKey + "';");
+                if (result == "")
                 {
-
-                    //Open the connection to the database
-                    conn.Open();
-
-                    //Add the information for the SelectCommand using the SQL statement and the connection object
-                    adapter.SelectCommand = new OleDbCommand(sSQL, conn);
-                    adapter.SelectCommand.CommandTimeout = 0;
-
-                    //Fill up the DataSet with data
-                    adapter.Fill(ds);
+                    return db.ExecuteNonQuery("INSERT INTO ItemDesc (ItemCode, ItemDesc, Cost) VALUES('" + pKey + "','" + ItemDesc + "','" + cost.ToString() + "');");
                 }
+                else return -1;
             }
-
-            //Set the number of values returned
-            iRetVal = ds.Tables[0].Rows.Count;
-
-            //return the DataSet
-            return ds;
-        }
-        catch (Exception ex)
-        {
-            throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
-        }
-    }
-
-    /// <summary>
-    /// This method takes an SQL statment that is passed in and executes it.  The resulting single 
-    /// value is returned.
-    /// </summary>
-    /// <param name="sSQL">The SQL statement to be executed.</param>
-    /// <returns>Returns a string from the scalar SQL statement.</returns>
-    public string ExecuteScalarSQL(string sSQL)
-    {
-        try
-        {
-            //Holds the return value
-            object obj;
-
-            using (OleDbConnection conn = new OleDbConnection(sConnectionString))
+            catch (Exception ex)
             {
-                using (OleDbDataAdapter adapter = new OleDbDataAdapter())
-                {
-
-                    //Open the connection to the database
-                    conn.Open();
-
-                    //Add the information for the SelectCommand using the SQL statement and the connection object
-                    adapter.SelectCommand = new OleDbCommand(sSQL, conn);
-                    adapter.SelectCommand.CommandTimeout = 0;
-
-                    //Execute the scalar SQL statement
-                    obj = adapter.SelectCommand.ExecuteScalar();
-                }
-            }
-
-            //See if the object is null
-            if (obj == null)
-            {
-                //Return a blank
-                return "";
-            }
-            else
-            {
-                //Return the value
-                return obj.ToString();
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }
-        catch (Exception ex)
+        /// <summary>
+        /// Deletes an ItemCode pKey from the database
+        /// </summary>
+        /// <param name="pKey"></param>
+        /// <returns>Number of rows affected</returns>
+        public int DeleteItem(string pKey)
         {
-            throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
-        }
-    }
-
-    /// <summary>
-    /// This method takes an SQL statment that is a non query and executes it.
-    /// </summary>
-    /// <param name="sSQL">The SQL statement to be executed.</param>
-    /// <returns>Returns the number of rows affected by the SQL statement.</returns>
-    public int ExecuteNonQuery(string sSQL)
-    {
-        try
-        {
-            //Number of rows affected
-            int iNumRows;
-
-            using (OleDbConnection conn = new OleDbConnection(sConnectionString))
+            try
             {
-                //Open the connection to the database
-                conn.Open();
+                return db.ExecuteNonQuery("DELETE FROM ItemDesc WHERE ItemCode = '" + pKey + "';");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+        /// <summary>
+        /// Deletes all items that match ItemDesc and cost
+        /// </summary>
+        /// <param name="ItemDesc"></param>
+        /// <param name="cost"></param>
+        /// <returns>Number of rows affected</returns>
+        public int DeleteItem(string ItemDesc, double cost)
+        {
+            try
+            {
+                return db.ExecuteNonQuery("DELETE FROM ItemDesc WHERE ItemDesc = '" + ItemDesc + "' AND cost = " + cost.ToString() + ";");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
 
-                //Add the information for the SelectCommand using the SQL statement and the connection object
-                OleDbCommand cmd = new OleDbCommand(sSQL, conn);
-                cmd.CommandTimeout = 0;
+        public int UpdateItem(string pKey, string ItemDesc, double cost)
+        {
+            try
+            {
+                return db.ExecuteNonQuery("UPDATE ItemDesc SET ItemDesc = '" + ItemDesc + "', Cost = '" + cost.ToString() + "' WHERE ItemCode='" + pKey + "';");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
 
-                //Execute the non query SQL statement
-                iNumRows = cmd.ExecuteNonQuery();
+        public DataSet DisplayItemDescTable(ref int rows)
+        {
+            try
+            {
+                return db.ExecuteSQLStatement("SELECT * FROM ItemDesc ORDER BY ItemCode", ref rows);
             }
 
-            //return the number of rows affected
-            return iNumRows;
-        }
-        catch (Exception ex)
-        {
-            throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
         }
     }
 }

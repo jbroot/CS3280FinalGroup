@@ -21,11 +21,11 @@ namespace GroupAssignment
     /// </summary>
     public partial class wndItems : Window
     {
-        clsItemsLogic myLogic;
+        clsItemsSQL myDBLibrary;
         public wndItems()
         {
             InitializeComponent();
-            myLogic = new clsItemsLogic();
+            myDBLibrary = new clsItemsSQL();
 
             gui();
 
@@ -35,7 +35,7 @@ namespace GroupAssignment
         void gui()
         {
             int rowsAffected = 0;
-            DataSet myData = myLogic.DisplayItemDescTable(ref rowsAffected);
+            DataSet myData = myDBLibrary.DisplayItemDescTable(ref rowsAffected);
             ItemDescTableDataGrid.DataContext = myData;
             
         }
@@ -46,13 +46,13 @@ namespace GroupAssignment
         /// </summary>
         void test()
         {
-            myLogic.AddItem("AA", "Test", 100.3553);
-            myLogic.UpdateItem("AA", "TestUpdate", 50);
-            myLogic.DeleteItem("AA");
+            myDBLibrary.AddItem("AA", "Test", 100.3553);
+            myDBLibrary.UpdateItem("AA", "TestUpdate", 50);
+            myDBLibrary.DeleteItem("AA");
 
-            if (myLogic.AddItem("A", "-1", 60) != -1) throw new Exception("-1 didn't return from used pKey");
-            myLogic.AddItem("AA", "TestOveride", 56);
-            myLogic.DeleteItem("TestOveride", 56);
+            if (myDBLibrary.AddItem("A", "-1", 60) != -1) throw new Exception("-1 didn't return from used pKey");
+            myDBLibrary.AddItem("AA", "TestOveride", 56);
+            myDBLibrary.DeleteItem("TestOveride", 56);
         }
         
     }
