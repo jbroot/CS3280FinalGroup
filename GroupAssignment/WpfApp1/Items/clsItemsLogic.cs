@@ -112,7 +112,11 @@ namespace GroupAssignment
             dbLink.DeleteItem(pKey);
             foreach (Item item in itemList)
             {
-                if (item.ItemCode == pKey) itemList.Remove(item);
+                if (item.ItemCode == pKey)
+                {
+                    itemList.Remove(item);
+                    return;
+                }
             }
         }
         /// <summary>
