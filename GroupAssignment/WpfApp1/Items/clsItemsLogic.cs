@@ -11,6 +11,9 @@ namespace GroupAssignment
         /// Associates with the class that makes SQL statemnts
         /// </summary>
         clsItemsSQL dbLink;
+        /// <summary>
+        /// Default constructor for the clsItemsLogic class
+        /// </summary>
         public clsItemsLogic()
         {
             try
@@ -52,6 +55,5 @@ namespace GroupAssignment
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }
-
     }
 }

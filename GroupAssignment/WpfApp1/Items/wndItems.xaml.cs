@@ -42,6 +42,9 @@ namespace GroupAssignment
                 ItemDescTableDataGrid.CanUserAddRows = false;
 
                 gui();
+
+                //for troubleshooting only
+                //test();
             }
             catch (Exception ex)
             {
@@ -57,7 +60,7 @@ namespace GroupAssignment
             
         }
 
-        /*
+        
         /// <summary>
         /// Test SQL class. Delete before final project
         /// </summary>
@@ -70,7 +73,17 @@ namespace GroupAssignment
             if (myDBLibrary.AddItem("A", "-1", 60) != -1) throw new Exception("-1 didn't return from used pKey");
             myDBLibrary.AddItem("AA", "TestOveride", 56);
             myDBLibrary.DeleteItem("TestOveride", 56);
-        }*/
+
+            string listCheck = "";
+
+            foreach (var Item in itemList)
+            {
+                listCheck += Item.ItemCode + "." + Item.ItemDesc + "." + Item.ItemCost.ToString() + "\n";
+            }
+
+            MessageBox.Show(listCheck);
+
+        }
         
     }
 }
