@@ -33,20 +33,17 @@ namespace GroupAssignment
         /// <param name="pKey"></param>
         /// <param name="ItemDesc"></param>
         /// <param name="cost"></param>
-        /// <returns>Newly created Item or null if the pKey is already used</returns>
-        public Item AddItem(string pKey, string ItemDesc, double cost)
+        /// <returns>Number of rows affected or -1 if the pKey is already used</returns>
+        public int AddItem(string pKey, string ItemDesc, double cost)
         {
             try
             {
                 string result = db.ExecuteScalarSQL("SELECT * FROM ItemDesc WHERE ItemCode = '" + pKey + "';");
                 if (result == "")
                 {
-                    Item newItem = new Item(pKey, ItemDesc, cost);
-                    myLogic.itemList.Add(newItem);
-                    db.ExecuteNonQuery("INSERT INTO ItemDesc (ItemCode, ItemDesc, Cost) VALUES('" + pKey + "','" + ItemDesc + "','" + cost.ToString() + "');");
-                    return newItem;
+                    return db.ExecuteNonQuery("INSERT INTO ItemDesc (ItemCode, ItemDesc, Cost) VALUES('" + pKey + "','" + ItemDesc + "','" + cost.ToString() + "');");
                 }
-                else return null;
+                else return -1;
             }
             catch (Exception ex)
             {
@@ -93,12 +90,18 @@ namespace GroupAssignment
         /// <param name="pKey"></param>
         /// <param name="ItemDesc"></param>
         /// <param name="cost"></param>
-        /// <returns>Number of rows affected</returns>
+        /// <returns>Number of rows affected or -1 if pKey doesn't exist</returns>
         public int UpdateItem(string pKey, string ItemDesc, double cost)
         {
             try
             {
-                return db.ExecuteNonQuery("UPDATE ItemDesc SET ItemDesc = '" + ItemDesc + "', Cost = '" + cost.ToString() + "' WHERE ItemCode='" + pKey + "';");
+
+                string result = db.ExecuteScalarSQL("SELECT * FROM ItemDesc WHERE ItemCode = '" + pKey + "';");
+                if (result != "")
+                {
+                    return db.ExecuteNonQuery("UPDATE ItemDesc SET ItemDesc = '" + ItemDesc + "', Cost = '" + cost.ToString() + "' WHERE ItemCode='" + pKey + "';");
+                }
+                else return -1;
             }
             catch (Exception ex)
             {

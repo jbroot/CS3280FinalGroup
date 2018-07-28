@@ -103,5 +103,38 @@ namespace GroupAssignment
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }
+        /// <summary>
+        /// Deletes item from list and from database
+        /// </summary>
+        /// <param name="pKey"></param>
+        public void DeleteItem(string pKey)
+        {
+            dbLink.DeleteItem(pKey);
+            foreach (Item item in itemList)
+            {
+                if (item.ItemCode == pKey) itemList.Remove(item);
+            }
+        }
+        /// <summary>
+        /// Updates itemList and database
+        /// </summary>
+        /// <param name="pKey"></param>
+        /// <param name="ItemDesc"></param>
+        /// <param name="cost"></param>
+        /// <returns>Null if pKey isn't found or Item if pKey is found</returns>
+        public Item UpdateItem(string pKey, string ItemDesc, double cost)
+        {
+            if (dbLink.UpdateItem(pKey, ItemDesc, cost) == -1) return null;
+            foreach (Item item in itemList)
+            {
+                if (item.ItemCode == pKey)
+                {
+                    item.ItemDesc = ItemDesc;
+                    item.ItemCost = cost;
+                    return item;
+                }
+            }
+            return null;
+        }
     }
 }
