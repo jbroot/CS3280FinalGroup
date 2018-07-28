@@ -18,14 +18,6 @@ namespace GroupAssignment
         /// Associates with the business logic class
         /// </summary>
         clsItemsLogic myLogic;
-        /// <summary>
-        /// A list of all items in the ItemDesc table
-        /// </summary>
-        List<Item> itemList;
-        /// <summary>
-        /// Length of list
-        /// </summary>
-        int listLength = 0;
 
         /// <summary>
         /// Initialized the wndItems Window
@@ -37,7 +29,6 @@ namespace GroupAssignment
                 InitializeComponent();
                 myDBLibrary = new clsItemsSQL();
                 myLogic = new clsItemsLogic();
-                itemList = myLogic.getItems(ref listLength);
 
                 ItemDescTableDataGrid.CanUserAddRows = false;
 
@@ -62,10 +53,11 @@ namespace GroupAssignment
 
         
         /// <summary>
-        /// Test SQL class. Delete before final project
+        /// Tests code. Delete before final project
         /// </summary>
         void test()
         {
+            //Test SQL
             myDBLibrary.AddItem("AA", "Test", 100.35);
             myDBLibrary.UpdateItem("AA", "TestUpdate", 50);
             myDBLibrary.DeleteItem("AA");
@@ -74,9 +66,10 @@ namespace GroupAssignment
             myDBLibrary.AddItem("AA", "TestOveride", 56);
             myDBLibrary.DeleteItem("TestOveride", 56);
 
+            //Test itemList
             string listCheck = "";
 
-            foreach (var Item in itemList)
+            foreach (var Item in myLogic.itemList)
             {
                 listCheck += Item.ItemCode + "." + Item.ItemDesc + "." + Item.ItemCost.ToString() + "\n";
             }

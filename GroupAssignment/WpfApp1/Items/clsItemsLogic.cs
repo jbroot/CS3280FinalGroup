@@ -12,6 +12,14 @@ namespace GroupAssignment
         /// </summary>
         clsItemsSQL dbLink;
         /// <summary>
+        /// A list of all items in the ItemDesc table
+        /// </summary>
+        public List<Item> itemList;
+        /// <summary>
+        /// Length of list
+        /// </summary>
+        public int listLength = 0;
+        /// <summary>
         /// Default constructor for the clsItemsLogic class
         /// </summary>
         public clsItemsLogic()
@@ -19,6 +27,7 @@ namespace GroupAssignment
             try
             {
                 dbLink = new clsItemsSQL();
+                itemList = getItems(ref listLength)
             }
             catch (Exception ex)
             {
@@ -54,6 +63,20 @@ namespace GroupAssignment
             {
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
+        }
+
+        /// <summary>
+        /// Finds Item in Itemlist
+        /// </summary>
+        /// <param name="ItemCode"></param>
+        /// <returns>returns Item if found, else returns null</returns>
+        public Item getItem(string ItemCode)
+        {
+            foreach (var item in itemList)
+            {
+                if (item.ItemCode == ItemCode) return item;
+            }
+            return null;
         }
     }
 }
