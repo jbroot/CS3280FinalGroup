@@ -48,13 +48,10 @@ namespace GroupAssignment
 
                 for (int i = 0; i < rowsAffected; i++)
                 {
-                    ItemList.Add(new Item
-                    {
-                        ItemCode = (string)myData.Tables[0].Rows[i][0],
-                        ItemDesc = (string)myData.Tables[0].Rows[i][1],
-                        ItemCost = decimal.ToDouble((decimal)myData.Tables[0].Rows[i][2])
-                    }
-                    );
+                    Item newItem = new Item((string)myData.Tables[0].Rows[i][0],
+                        (string)myData.Tables[0].Rows[i][1],
+                        decimal.ToDouble((decimal)myData.Tables[0].Rows[i][2]));
+                    ItemList.Add(newItem);
                 }
                 return ItemList;
             }
@@ -72,11 +69,39 @@ namespace GroupAssignment
         /// <returns>returns Item if found, else returns null</returns>
         public Item GetItem(string ItemCode)
         {
-            foreach (Item item in itemList)
+            try
             {
-                if (item.ItemCode == ItemCode) return item;
+                foreach (Item item in itemList)
+                {
+                    if (item.ItemCode == ItemCode) return item;
+                }
+                return null;
             }
-            return null;
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+        /// <summary>
+        /// Adds item to list and to database
+        /// </summary>
+        /// <param name="pKey"></param>
+        /// <param name="ItemDesc"></param>
+        /// <param name="cost"></param>
+        /// <returns>null if pKey is already used or the new Item if successful</returns>
+        public Item AddItem(string pKey, string ItemDesc, double cost)
+        {
+            try
+            {
+                if (dbLink.AddItem(pKey, ItemDesc, cost) == -1) return null;
+                Item newItem = new Item(pKey, ItemDesc, cost);
+                itemList.Add(newItem);
+                return newItem;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
         }
     }
 }

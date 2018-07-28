@@ -17,5 +17,11 @@
         /// Item Cost
         /// </summary>
         public double ItemCost { get; set; }
+        public Item(string itCode, string itDesc, double itCost)
+        {
+            this.ItemCode = itCode;
+            this.ItemDesc = itDesc;
+            this.ItemCost = itCost;
+        }
     }
 }

@@ -10,6 +10,10 @@ namespace GroupAssignment
         /// Association with the class that directly opens the database
         /// </summary>
         ConnectDB db;
+        /// <summary>
+        /// Associates with the business logic class
+        /// </summary>
+        clsItemsLogic myLogic;
 
         public clsItemsSQL()
         {
@@ -29,17 +33,20 @@ namespace GroupAssignment
         /// <param name="pKey"></param>
         /// <param name="ItemDesc"></param>
         /// <param name="cost"></param>
-        /// <returns>Number of rows affected or -1 if the pKey is already used</returns>
-        public int AddItem(string pKey, string ItemDesc, double cost)
+        /// <returns>Newly created Item or null if the pKey is already used</returns>
+        public Item AddItem(string pKey, string ItemDesc, double cost)
         {
             try
             {
                 string result = db.ExecuteScalarSQL("SELECT * FROM ItemDesc WHERE ItemCode = '" + pKey + "';");
                 if (result == "")
                 {
-                    return db.ExecuteNonQuery("INSERT INTO ItemDesc (ItemCode, ItemDesc, Cost) VALUES('" + pKey + "','" + ItemDesc + "','" + cost.ToString() + "');");
+                    Item newItem = new Item(pKey, ItemDesc, cost);
+                    myLogic.itemList.Add(newItem);
+                    db.ExecuteNonQuery("INSERT INTO ItemDesc (ItemCode, ItemDesc, Cost) VALUES('" + pKey + "','" + ItemDesc + "','" + cost.ToString() + "');");
+                    return newItem;
                 }
-                else return -1;
+                else return null;
             }
             catch (Exception ex)
             {
