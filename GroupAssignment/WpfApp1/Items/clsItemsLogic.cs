@@ -96,6 +96,7 @@ namespace GroupAssignment
                 if (dbLink.AddItem(pKey, ItemDesc, cost) == -1) return null;
                 Item newItem = new Item(pKey, ItemDesc, cost);
                 itemList.Add(newItem);
+                ++listLength;
                 return newItem;
             }
             catch (Exception ex)
@@ -115,6 +116,7 @@ namespace GroupAssignment
                 if (item.ItemCode == pKey)
                 {
                     itemList.Remove(item);
+                    --listLength;
                     return;
                 }
             }
