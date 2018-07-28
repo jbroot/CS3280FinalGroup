@@ -1,18 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace GroupAssignment
 {
@@ -21,36 +10,56 @@ namespace GroupAssignment
     /// </summary>
     public partial class wndItems : Window
     {
+        /// <summary>
+        /// Associates with the class that makes SQL statements
+        /// </summary>
         clsItemsSQL myDBLibrary;
+        /// <summary>
+        /// Associates with the business logic class
+        /// </summary>
         clsItemsLogic myLogic;
-
+        /// <summary>
+        /// A list of all items in the ItemDesc table
+        /// </summary>
         List<Item> itemList;
+        /// <summary>
+        /// Length of list
+        /// </summary>
+        int listLength = 0;
+
+        /// <summary>
+        /// Initialized the wndItems Window
+        /// </summary>
         public wndItems()
         {
-            InitializeComponent();
-            myDBLibrary = new clsItemsSQL();
-            myLogic = new clsItemsLogic();
-            itemList = new List<Item>();
-            itemList = myLogic.getItems();
+            try
+            {
+                InitializeComponent();
+                myDBLibrary = new clsItemsSQL();
+                myLogic = new clsItemsLogic();
+                itemList = myLogic.getItems(ref listLength);
 
-            ItemDescTableDataGrid.CanUserAddRows = false;
+                ItemDescTableDataGrid.CanUserAddRows = false;
 
-            
-
-            gui();
-
-            //test();
+                gui();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
         }
 
+        /// <summary>
+        /// Helps initialize the GUI
+        /// </summary>
         void gui()
         {
             
-
         }
 
-
+        /*
         /// <summary>
-        /// Test Logic class. Delete before final project
+        /// Test SQL class. Delete before final project
         /// </summary>
         void test()
         {
@@ -61,7 +70,7 @@ namespace GroupAssignment
             if (myDBLibrary.AddItem("A", "-1", 60) != -1) throw new Exception("-1 didn't return from used pKey");
             myDBLibrary.AddItem("AA", "TestOveride", 56);
             myDBLibrary.DeleteItem("TestOveride", 56);
-        }
+        }*/
         
     }
 }

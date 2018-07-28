@@ -1,20 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GroupAssignment
 {
     public class clsItemsSQL
     {
+        /// <summary>
+        /// Association with the class that directly opens the database
+        /// </summary>
         ConnectDB db;
 
         public clsItemsSQL()
         {
-            db = new ConnectDB();
+            try
+            {
+                db = new ConnectDB();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
         }
 
         /// <summary>
@@ -74,6 +80,13 @@ namespace GroupAssignment
             }
         }
 
+        /// <summary>
+        /// Updates an Item
+        /// </summary>
+        /// <param name="pKey"></param>
+        /// <param name="ItemDesc"></param>
+        /// <param name="cost"></param>
+        /// <returns>Number of rows affected</returns>
         public int UpdateItem(string pKey, string ItemDesc, double cost)
         {
             try
@@ -86,6 +99,11 @@ namespace GroupAssignment
             }
         }
 
+        /// <summary>
+        /// Returns all Items in the table
+        /// </summary>
+        /// <param name="rows"></param>
+        /// <returns>Dataset of all columns in ItemDesc</returns>
         public DataSet DisplayItemDescTable(ref int rows)
         {
             try
