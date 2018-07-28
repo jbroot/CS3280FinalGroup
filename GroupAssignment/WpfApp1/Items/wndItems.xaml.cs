@@ -66,6 +66,9 @@ namespace GroupAssignment
             myDBLibrary.AddItem("AA", "TestOveride", 56);
             myDBLibrary.DeleteItem("TestOveride", 56);
 
+            //Test getItem()
+            Item testGet = myLogic.GetItem("A");
+
             //Test itemList
             string listCheck = "";
 

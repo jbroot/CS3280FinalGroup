@@ -27,7 +27,7 @@ namespace GroupAssignment
             try
             {
                 dbLink = new clsItemsSQL();
-                itemList = getItems(ref listLength)
+                itemList = GetItems(ref listLength);
             }
             catch (Exception ex)
             {
@@ -39,7 +39,7 @@ namespace GroupAssignment
         /// Gets a dataset from the table then returns a List<Item>
         /// </summary>
         /// <returns>List of Items from the dataset</returns>
-        public List<Item> getItems(ref int rowsAffected)
+        public List<Item> GetItems(ref int rowsAffected)
         {
             try
             {
@@ -70,9 +70,9 @@ namespace GroupAssignment
         /// </summary>
         /// <param name="ItemCode"></param>
         /// <returns>returns Item if found, else returns null</returns>
-        public Item getItem(string ItemCode)
+        public Item GetItem(string ItemCode)
         {
-            foreach (var item in itemList)
+            foreach (Item item in itemList)
             {
                 if (item.ItemCode == ItemCode) return item;
             }
