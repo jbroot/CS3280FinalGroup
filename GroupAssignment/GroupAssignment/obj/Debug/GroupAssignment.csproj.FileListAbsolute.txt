@@ -19,3 +19,24 @@ C:\Users\Maf\source\repos\GroupAssignment\GroupAssignment\obj\Debug\GroupAssignm
 C:\Users\Maf\source\repos\GroupAssignment\GroupAssignment\obj\Debug\GroupAssignment.exe
 C:\Users\Maf\source\repos\GroupAssignment\GroupAssignment\obj\Debug\GroupAssignment.pdb
 C:\Users\Maf\source\repos\GroupAssignment\GroupAssignment\obj\Debug\GroupAssignment.csprojAssemblyReference.cache
+C:\Users\j\Downloads\tmp\CS3280FinalGroup-master (1)\CS3280FinalGroup-master\GroupAssignment\GroupAssignment\bin\Debug\Resources\Invoice.mdb
+C:\Users\j\Downloads\tmp\CS3280FinalGroup-master (1)\CS3280FinalGroup-master\GroupAssignment\GroupAssignment\bin\Debug\GroupAssignment.exe.config
+C:\Users\j\Downloads\tmp\CS3280FinalGroup-master (1)\CS3280FinalGroup-master\GroupAssignment\GroupAssignment\bin\Debug\GroupAssignment.exe
+C:\Users\j\Downloads\tmp\CS3280FinalGroup-master (1)\CS3280FinalGroup-master\GroupAssignment\GroupAssignment\bin\Debug\GroupAssignment.pdb
+C:\Users\j\Downloads\tmp\CS3280FinalGroup-master (1)\CS3280FinalGroup-master\GroupAssignment\GroupAssignment\obj\Debug\GroupAssignment.csprojAssemblyReference.cache
+C:\Users\j\Downloads\tmp\CS3280FinalGroup-master (1)\CS3280FinalGroup-master\GroupAssignment\GroupAssignment\obj\Debug\Items\wndItems.g.cs
+C:\Users\j\Downloads\tmp\CS3280FinalGroup-master (1)\CS3280FinalGroup-master\GroupAssignment\GroupAssignment\obj\Debug\Main\wndMain.g.cs
+C:\Users\j\Downloads\tmp\CS3280FinalGroup-master (1)\CS3280FinalGroup-master\GroupAssignment\GroupAssignment\obj\Debug\Search\wndSearch.g.cs
+C:\Users\j\Downloads\tmp\CS3280FinalGroup-master (1)\CS3280FinalGroup-master\GroupAssignment\GroupAssignment\obj\Debug\App.g.cs
+C:\Users\j\Downloads\tmp\CS3280FinalGroup-master (1)\CS3280FinalGroup-master\GroupAssignment\GroupAssignment\obj\Debug\GroupAssignment_Content.g.cs
+C:\Users\j\Downloads\tmp\CS3280FinalGroup-master (1)\CS3280FinalGroup-master\GroupAssignment\GroupAssignment\obj\Debug\GroupAssignment_MarkupCompile.cache
+C:\Users\j\Downloads\tmp\CS3280FinalGroup-master (1)\CS3280FinalGroup-master\GroupAssignment\GroupAssignment\obj\Debug\GroupAssignment_MarkupCompile.lref
+C:\Users\j\Downloads\tmp\CS3280FinalGroup-master (1)\CS3280FinalGroup-master\GroupAssignment\GroupAssignment\obj\Debug\Items\wndItems.baml
+C:\Users\j\Downloads\tmp\CS3280FinalGroup-master (1)\CS3280FinalGroup-master\GroupAssignment\GroupAssignment\obj\Debug\Main\wndMain.baml
+C:\Users\j\Downloads\tmp\CS3280FinalGroup-master (1)\CS3280FinalGroup-master\GroupAssignment\GroupAssignment\obj\Debug\Search\wndSearch.baml
+C:\Users\j\Downloads\tmp\CS3280FinalGroup-master (1)\CS3280FinalGroup-master\GroupAssignment\GroupAssignment\obj\Debug\GroupAssignment.g.resources
+C:\Users\j\Downloads\tmp\CS3280FinalGroup-master (1)\CS3280FinalGroup-master\GroupAssignment\GroupAssignment\obj\Debug\GroupAssignment.Properties.Resources.resources
+C:\Users\j\Downloads\tmp\CS3280FinalGroup-master (1)\CS3280FinalGroup-master\GroupAssignment\GroupAssignment\obj\Debug\GroupAssignment.csproj.GenerateResource.cache
+C:\Users\j\Downloads\tmp\CS3280FinalGroup-master (1)\CS3280FinalGroup-master\GroupAssignment\GroupAssignment\obj\Debug\GroupAssignment.csproj.CoreCompileInputs.cache
+C:\Users\j\Downloads\tmp\CS3280FinalGroup-master (1)\CS3280FinalGroup-master\GroupAssignment\GroupAssignment\obj\Debug\GroupAssignment.exe
+C:\Users\j\Downloads\tmp\CS3280FinalGroup-master (1)\CS3280FinalGroup-master\GroupAssignment\GroupAssignment\obj\Debug\GroupAssignment.pdb
