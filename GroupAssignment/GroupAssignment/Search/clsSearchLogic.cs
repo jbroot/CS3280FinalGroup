@@ -18,7 +18,7 @@ namespace GroupAssignment.Search
         /// <summary>
         /// List of invoices
         /// </summary>
-        List<searchInvoice> invoiceList;
+        List<Invoice> invoiceList;
         /// <summary>
         /// Length of invoiceList
         /// </summary>
@@ -45,16 +45,16 @@ namespace GroupAssignment.Search
         /// </summary>
         /// <param name="rowsAffected"></param>
         /// <returns>a list of all invoices</returns>
-        public List<searchInvoice> GetInvoices(ref int rowsAffected)
+        public List<Invoice> GetInvoices(ref int rowsAffected)
         {
             try
             {
-                List<searchInvoice> newInvoiceList = new List<searchInvoice>();
+                List<Invoice> newInvoiceList = new List<Invoice>();
                 DataSet myData = dbLink.DisplayInvoicesTable(ref rowsAffected);
 
                 for (int i = 0; i < rowsAffected; i++)
                 {
-                    searchInvoice newInvoice = new searchInvoice((int)myData.Tables[0].Rows[i][0],
+                    Invoice newInvoice = new Invoice((int)myData.Tables[0].Rows[i][0],
                         (DateTime)myData.Tables[0].Rows[i][1]);
                     newInvoiceList.Add(newInvoice);
                 }

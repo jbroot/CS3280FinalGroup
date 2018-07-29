@@ -54,7 +54,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="clsSql.cs" />
     <Compile Include="ConnectDB.cs" />
     <Compile Include="Main\Invoice.cs" />
     <Compile Include="Main\LineItem.cs" />
@@ -63,7 +62,6 @@
     </Compile>
     <Compile Include="Search\clsSearchLogic.cs" />
     <Compile Include="Search\clsSearchSQL.cs" />
-    <Compile Include="Search\searchInvoice.cs" />
     <Compile Include="Search\wndSearch.xaml.cs">
       <DependentUpon>wndSearch.xaml</DependentUpon>
     </Compile>
