@@ -54,6 +54,25 @@ namespace GroupAssignment.Search
         }
 
         /// <summary>
+        /// Displays all Invoices with the total cost as a third column
+        /// </summary>
+        /// <param name="rowsAffected"></param>
+        /// <returns>Dataset</returns>
+        public DataSet DisplayInvoicesTotalCostTable(ref int rowsAffected)
+        {
+            try
+            {
+                return db.ExecuteSQLStatement("SELECT Invoices.InvoiceNum, Invoices.InvoiceDate, Sum(ItemDesc.Cost) AS SumOfCost " +
+                    "FROM Invoices INNER JOIN(ItemDesc INNER JOIN LineItems ON ItemDesc.ItemCode = LineItems.ItemCode) ON Invoices.InvoiceNum = LineItems.InvoiceNum " +
+                    "GROUP BY Invoices.InvoiceNum, Invoices.InvoiceDate" + ";", ref rowsAffected);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
+        /// <summary>
         /// Returns all rows in the Invoices Table
         /// </summary>
         /// <param name="rows"></param>
