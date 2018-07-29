@@ -218,5 +218,19 @@ namespace GroupAssignment.Main
             }
             return false;
         }
+
+        /// <summary>
+        /// Returns the max invoice number
+        /// </summary>
+        /// <returns></returns>
+        public int maxInvoiceNumber()
+        {
+            string query = "SELECT MAX(InvoiceNum) FROM Invoices";
+            int rows = 0;
+            DataSet ds = db.ExecuteSQLStatement(query, ref rows);
+            int result = -1;
+            int.TryParse(ds.Tables[0].Rows[0].ToString(), out result);
+            return result;
+        }
     }
 }
