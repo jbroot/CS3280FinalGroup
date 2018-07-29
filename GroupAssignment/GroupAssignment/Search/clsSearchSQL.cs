@@ -90,5 +90,18 @@ namespace GroupAssignment.Search
             }
         }
 
+        public string MaxInvoiceNum()
+        {
+            try
+            {
+                return db.ExecuteScalarSQL("SELECT MAX(InvoiceNum) FROM Invoices");
+            }
+
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
     }
 }
