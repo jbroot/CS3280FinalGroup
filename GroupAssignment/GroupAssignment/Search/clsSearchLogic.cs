@@ -24,6 +24,9 @@ namespace GroupAssignment.Search
         /// </summary>
         int invoiceLength;
 
+        /// <summary>
+        /// Constructs the clsSearchLogic class
+        /// </summary>
         public clsSearchLogic()
         {
             try
@@ -36,6 +39,12 @@ namespace GroupAssignment.Search
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }
+
+        /// <summary>
+        /// Returns a list of all invoices
+        /// </summary>
+        /// <param name="rowsAffected"></param>
+        /// <returns>a list of all invoices</returns>
         public List<searchInvoice> GetInvoices(ref int rowsAffected)
         {
             try

@@ -16,6 +16,9 @@ namespace GroupAssignment.Search
         /// </summary>
         ConnectDB db;
 
+        /// <summary>
+        /// Constructs clsSearchSQL
+        /// </summary>
         public clsSearchSQL()
         {
             try
@@ -28,6 +31,13 @@ namespace GroupAssignment.Search
             }
         }
 
+        /// <summary>
+        /// Searches for invoiceNum and date
+        /// </summary>
+        /// <param name="invoiceNum"></param>
+        /// <param name="date"></param>
+        /// <param name="rowsAffected"></param>
+        /// <returns>Dataset[InvoiceNum][InvoiceDate][totalCost]</returns>
         public DataSet Search(int invoiceNum, DateTime date, ref int rowsAffected)
         {
             try {
@@ -43,6 +53,11 @@ namespace GroupAssignment.Search
             }
         }
 
+        /// <summary>
+        /// Returns all rows in the Invoices Table
+        /// </summary>
+        /// <param name="rows"></param>
+        /// <returns>all rows in the Invoices Table</returns>
         public DataSet DisplayInvoicesTable(ref int rows)
         {
             try
