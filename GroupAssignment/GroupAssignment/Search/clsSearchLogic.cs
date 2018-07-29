@@ -24,7 +24,7 @@ namespace GroupAssignment.Search
         /// </summary>
         int invoiceLength;
 
-        clsSearchLogic()
+        public clsSearchLogic()
         {
             try
             {

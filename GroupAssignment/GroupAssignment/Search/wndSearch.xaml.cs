@@ -19,9 +19,23 @@ namespace GroupAssignment.Search
     /// </summary>
     public partial class wndSearch : Window
     {
+        clsSearchLogic myLogic;
+
+        clsSearchSQL searchSQL;
         public wndSearch()
         {
             InitializeComponent();
+            myLogic = new clsSearchLogic();
+            searchSQL = new clsSearchSQL();
+            //for troubleshooting only
+            test();
+        }
+
+        void test()
+        {
+            int rowsAffected = 0;
+            DateTime date = new DateTime(2018, 4, 23);
+            searchSQL.Search(5000, date, ref rowsAffected);
         }
     }
 }
