@@ -22,22 +22,24 @@ namespace GroupAssignment.Main
     /// </summary>
     public partial class wndMain : Window
     {
-        ObservableCollection<LineItem> lineItems;
-        Invoice invoice { get; set; }
-        clsMainLogic logic { get; set; }
-        clsMainSQL dataaccess { get; set; }
+        
 
+        /// <summary>
+        /// Reference to the clsMainLogic for easier usage throughout the class
+        /// </summary>
+        clsMainLogic logic { get; set; }
+        
         List<Items.Item> items { get; set; }
 
         public wndMain()
         {
             InitializeComponent();
             logic = new clsMainLogic();
-            lineItems = new ObservableCollection<LineItem>();
+            logic.lineItems = new ObservableCollection<LineItem>();
             dataGridLineItems.Items.Clear();
-            dataGridLineItems.ItemsSource = lineItems;
+            dataGridLineItems.ItemsSource = logic.lineItems;
                 
-            dataaccess = new clsMainSQL();
+           // dataaccess = new clsMainSQL();
             //items = logic.
             //comboBoxItemSelection.ItemsSource = logic.;
 
@@ -103,7 +105,7 @@ namespace GroupAssignment.Main
 
         private void buttonEdit_Click(object sender, RoutedEventArgs e)
         {
-            setScreenControls(false);
+            setScreenControls(true);
         }
 
         private void buttonSave_Click(object sender, RoutedEventArgs e)
@@ -128,7 +130,7 @@ namespace GroupAssignment.Main
             textBoxPrice.Text = "";
 
             textBoxTotal.Text = "";
-            lineItems.Clear(); // = new ObservableCollection<LineItem>();
+            logic.lineItems.Clear(); // = new ObservableCollection<LineItem>();
             
             //dataGridLineItems.Items.Clear();
             dataGridLineItems.Items.Refresh();
@@ -170,7 +172,7 @@ namespace GroupAssignment.Main
             li.item = i;
             //liItemCode = "a";
             li.LineItemNum = 2;
-            lineItems.Add(li);
+            logic.lineItems.Add(li);
             //String[] s = new string[] { "a", "b", "c" };
            // dataGridLineItems.Items.Add(s);
             dataGridLineItems.Items.Refresh();
@@ -192,7 +194,7 @@ namespace GroupAssignment.Main
 
         private void buttonTestSql_Click(object sender, RoutedEventArgs e)
         {
-            clsMainSQL sql = new clsMainSQL();
+            /*clsMainSQL sql = new clsMainSQL();
 
             String a = sql.deleteAllLineItemByInvoiceId(44);
             String b = sql.deleteInvoice(100);
@@ -206,7 +208,7 @@ namespace GroupAssignment.Main
             String g = sql.selectLineItemsByInvoiceNumber(5000);
 
             String h = sql.updateInvoice(5000, new DateTime(2018, 8,1));
-            String i = sql.updateLineItems(5019, 1, "C");
+            String i = sql.updateLineItem(5019, 1, "C");
 
             
 
@@ -221,7 +223,7 @@ namespace GroupAssignment.Main
             db.ExecuteNonQuery(h);
             db.ExecuteNonQuery(i);
 
-            String blah = "";
+            String blah = "";*/
 
 
 
