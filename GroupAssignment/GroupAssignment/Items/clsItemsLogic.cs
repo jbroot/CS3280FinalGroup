@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
+using GroupAssignment.Main;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,6 +15,10 @@ namespace GroupAssignment.Items
         /// Associates with the class that makes SQL statemnts
         /// </summary>
         clsItemsSQL dbLink;
+        /// <summary>
+        /// Associate's with the main window business logic
+        /// </summary>
+        clsMainLogic mainLogic;
         /// <summary>
         /// A list of all items in the ItemDesc table
         /// </summary>
@@ -113,6 +118,7 @@ namespace GroupAssignment.Items
         /// <param name="pKey"></param>
         public void DeleteItem(string pKey)
         {
+            //if (!mainLogic.isItemOnInvoice(pKey)) return;
             dbLink.DeleteItem(pKey);
             foreach (Item item in itemList)
             {
