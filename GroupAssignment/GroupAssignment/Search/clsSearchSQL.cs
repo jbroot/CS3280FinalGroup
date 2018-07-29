@@ -33,8 +33,9 @@ namespace GroupAssignment.Search
             try {
                 return db.ExecuteSQLStatement("SELECT Invoices.InvoiceNum, Invoices.InvoiceDate, Sum(ItemDesc.Cost) AS SumOfCost " +
                     "FROM Invoices INNER JOIN(ItemDesc INNER JOIN LineItems ON ItemDesc.ItemCode = LineItems.ItemCode) ON Invoices.InvoiceNum = LineItems.InvoiceNum " +
-                    "WHERE Invoices.InvoiceNum = " + invoiceNum.ToString() + " AND InvoiceDate = '" + date.ToString() + 
-                    "' GROUP BY Invoices.InvoiceNum, Invoices.InvoiceDate" + ";", ref rowsAffected);
+                    "WHERE Invoices.InvoiceNum = " + invoiceNum + 
+                    " AND InvoiceDate = #" + date.ToShortDateString() + 
+                    "# GROUP BY Invoices.InvoiceNum, Invoices.InvoiceDate" + ";", ref rowsAffected);
             }
             catch (Exception ex)
             {
