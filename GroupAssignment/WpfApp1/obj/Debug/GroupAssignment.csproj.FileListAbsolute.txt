@@ -36,3 +36,13 @@ C:\Users\j\Desktop\school\CS3280\GroupAssignment\WpfApp1\obj\Debug\WpfApp1.g.res
 C:\Users\j\Desktop\school\CS3280\GroupAssignment\WpfApp1\obj\Debug\WpfApp1.Properties.Resources.resources
 C:\Users\j\Desktop\school\CS3280\GroupAssignment\WpfApp1\obj\Debug\GroupAssignment.csproj.GenerateResource.cache
 C:\Users\j\Desktop\school\CS3280\GroupAssignment\WpfApp1\obj\Debug\GroupAssignment.csproj.CoreCompileInputs.cache
+C:\Users\Maf\Downloads\CS3280FinalGroup-master (3 w my add)\CS3280FinalGroup-master\GroupAssignment\WpfApp1\obj\Debug\GroupAssignment.csprojAssemblyReference.cache
+C:\Users\Maf\Downloads\CS3280FinalGroup-master (3 w my add)\CS3280FinalGroup-master\GroupAssignment\WpfApp1\obj\Debug\Search\wndSearch.baml
+C:\Users\Maf\Downloads\CS3280FinalGroup-master (3 w my add)\CS3280FinalGroup-master\GroupAssignment\WpfApp1\obj\Debug\Items\wndItems.g.cs
+C:\Users\Maf\Downloads\CS3280FinalGroup-master (3 w my add)\CS3280FinalGroup-master\GroupAssignment\WpfApp1\obj\Debug\Main\wndMain.g.cs
+C:\Users\Maf\Downloads\CS3280FinalGroup-master (3 w my add)\CS3280FinalGroup-master\GroupAssignment\WpfApp1\obj\Debug\Search\wndSearch.g.cs
+C:\Users\Maf\Downloads\CS3280FinalGroup-master (3 w my add)\CS3280FinalGroup-master\GroupAssignment\WpfApp1\obj\Debug\App.g.cs
+C:\Users\Maf\Downloads\CS3280FinalGroup-master (3 w my add)\CS3280FinalGroup-master\GroupAssignment\WpfApp1\obj\Debug\WpfApp1_MarkupCompile.cache
+C:\Users\Maf\Downloads\CS3280FinalGroup-master (3 w my add)\CS3280FinalGroup-master\GroupAssignment\WpfApp1\obj\Debug\WpfApp1_MarkupCompile.lref
+C:\Users\Maf\Downloads\CS3280FinalGroup-master (3 w my add)\CS3280FinalGroup-master\GroupAssignment\WpfApp1\obj\Debug\WpfApp1.exe
+C:\Users\Maf\Downloads\CS3280FinalGroup-master (3 w my add)\CS3280FinalGroup-master\GroupAssignment\WpfApp1\obj\Debug\WpfApp1.pdb
