@@ -33,15 +33,18 @@ namespace GroupAssignment.Search
             myLogic = new clsSearchLogic();
             searchSQL = new clsSearchSQL();
             //for troubleshooting only
-            test();
+            //test();
         }
-
+        /*
+        /// <summary>
+        /// Method to help troubleshoot. Delete before final submission
+        /// </summary>
         void test()
         {
             int rowsAffected = 0;
             DateTime date = new DateTime(2018, 4, 23);
             searchSQL.Search(5000, date, ref rowsAffected);
-        }
+        }*/
 
         /// <summary>
         /// Sets the invoice id which will be able to be used by the calling window to pull up the invoice and associated information
