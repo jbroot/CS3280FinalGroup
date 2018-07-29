@@ -56,6 +56,11 @@ namespace GroupAssignment.Search
             this.Close();
         }
 
+        /// <summary>
+        /// Closes the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonCancel_Click(object sender, RoutedEventArgs e)
         {
             InvoiceID = 0;
