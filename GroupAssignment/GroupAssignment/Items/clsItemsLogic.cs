@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace GroupAssignment.Items
 {
@@ -112,20 +108,21 @@ namespace GroupAssignment.Items
         /// Deletes item from list and from database
         /// </summary>
         /// <param name="pKey"></param>
-        public void DeleteItem(string pKey)
+        public int DeleteItem(string pKey)
         {
             try
             {
-                dbLink.DeleteItem(pKey);
+                if (dbLink.DeleteItem(pKey) == 0) return 0;
                 foreach (Item item in itemList)
                 {
                     if (item.ItemCode == pKey)
                     {
                         itemList.Remove(item);
                         --listLength;
-                        return;
+                        return 1;
                     }
                 }
+                throw new Exception("Item deleted from database but not linked list");
             }
             catch (Exception ex)
             {
