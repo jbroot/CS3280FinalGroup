@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace GroupAssignment.Items
 {
@@ -113,15 +114,22 @@ namespace GroupAssignment.Items
         /// <param name="pKey"></param>
         public void DeleteItem(string pKey)
         {
-            dbLink.DeleteItem(pKey);
-            foreach (Item item in itemList)
+            try
             {
-                if (item.ItemCode == pKey)
+                dbLink.DeleteItem(pKey);
+                foreach (Item item in itemList)
                 {
-                    itemList.Remove(item);
-                    --listLength;
-                    return;
+                    if (item.ItemCode == pKey)
+                    {
+                        itemList.Remove(item);
+                        --listLength;
+                        return;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }
         /// <summary>
@@ -133,17 +141,24 @@ namespace GroupAssignment.Items
         /// <returns>Null if pKey isn't found or Item if pKey is found</returns>
         public Item UpdateItem(string pKey, string ItemDesc, double cost)
         {
-            if (dbLink.UpdateItem(pKey, ItemDesc, cost) == -1) return null;
-            foreach (Item item in itemList)
+            try
             {
-                if (item.ItemCode == pKey)
+                if (dbLink.UpdateItem(pKey, ItemDesc, cost) == -1) return null;
+                foreach (Item item in itemList)
                 {
-                    item.ItemDesc = ItemDesc;
-                    item.ItemCost = cost;
-                    return item;
+                    if (item.ItemCode == pKey)
+                    {
+                        item.ItemDesc = ItemDesc;
+                        item.ItemCost = cost;
+                        return item;
+                    }
                 }
+                return null;
             }
-            return null;
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
         }
     }
 }
