@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Data;
 using System.Reflection;
 using System.Windows;
 
@@ -85,7 +87,7 @@ namespace GroupAssignment.Items
                 Item newItem = myLogic.AddItem(pKey, iDesc, cost);
                 if (newItem == null)
                 {
-                    ErrorItemCode.Content = "That Item Code has already been taken";
+                    ErrorItemCode.Content = "That Item Name has already been taken";
                     return;
                 }
                 RefreshItemDataGrid();
@@ -119,7 +121,7 @@ namespace GroupAssignment.Items
                 Item newItem = myLogic.UpdateItem(pKey, iDesc, cost);
                 if (newItem == null)
                 {
-                    ErrorItemCode.Content = "That Item Code is not valid";
+                    ErrorItemCode.Content = "That Item Name is not valid";
                     return;
                 }
                 RefreshItemDataGrid();
@@ -145,7 +147,12 @@ namespace GroupAssignment.Items
                 int newItem = myLogic.DeleteItem(pKey);
                 if (newItem == 0)
                 {
-                    ErrorItemCode.Content = "That Item Code is not valid";
+                    ErrorItemCode.Content = "That Item Name is not valid.";
+                    return;
+                }
+                else if(newItem == -1)
+                {
+                    ErrorItemCode.Content = "That Item Name is currently used in an invoice.";
                     return;
                 }
                 RefreshItemDataGrid();
@@ -173,6 +180,14 @@ namespace GroupAssignment.Items
             {
                 System.IO.File.AppendAllText(@"C:\Error.txt", Environment.NewLine + "HandleError Exception: " + ex.Message);
             }
+        }
+
+        private void ItemDescTableDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            Item row = (Item) ItemDescTableDataGrid.SelectedItems[0];
+            itemCodeText.Text = row.ItemCode;
+            itemDescText.Text = row.ItemDesc;
+            itemCostText.Text = row.ItemCost.ToString();
         }
 
         /*

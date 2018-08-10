@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="wndItems" Height="450" Width="800">
     <Grid>
-        <DataGrid Name="ItemDescTableDataGrid" HorizontalAlignment="Left" Height="345" Margin="52,26,0,0" VerticalAlignment="Top" Width="335">
+        <DataGrid Name="ItemDescTableDataGrid" HorizontalAlignment="Left" Height="345" Margin="52,26,0,0" VerticalAlignment="Top" Width="335" SelectionChanged="ItemDescTableDataGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Item Code" Width="*" Binding="{Binding ItemCode}"/>
                 <DataGridTextColumn Header="Item Description" Width="*" Binding="{Binding ItemDesc}"/>

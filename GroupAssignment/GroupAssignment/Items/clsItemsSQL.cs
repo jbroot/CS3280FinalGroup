@@ -59,24 +59,8 @@ namespace GroupAssignment.Items
         {
             try
             {
+                if (db.ExecuteScalarSQL("select * from LineItems where ItemCode = '" + pKey + "';") != "") return -1;
                 return db.ExecuteNonQuery("DELETE FROM ItemDesc WHERE ItemCode = '" + pKey + "';");
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
-            }
-        }
-        /// <summary>
-        /// Deletes all items that match ItemDesc and cost
-        /// </summary>
-        /// <param name="ItemDesc"></param>
-        /// <param name="cost"></param>
-        /// <returns>Number of rows affected</returns>
-        public int DeleteItem(string ItemDesc, double cost)
-        {
-            try
-            {
-                return db.ExecuteNonQuery("DELETE FROM ItemDesc WHERE ItemDesc = '" + ItemDesc + "' AND cost = " + cost.ToString() + ";");
             }
             catch (Exception ex)
             {
