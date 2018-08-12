@@ -97,6 +97,7 @@ namespace GroupAssignment.Items
                 Item newItem = new Item(pKey, ItemDesc, cost);
                 itemList.Add(newItem);
                 ++listLength;
+                itemList = GetItems(ref listLength);
                 return newItem;
             }
             catch (Exception ex)
@@ -124,6 +125,7 @@ namespace GroupAssignment.Items
                         return 1;
                     }
                 }
+                itemList = GetItems(ref listLength);
                 throw new Exception("Item deleted from database but not linked list");
             }
             catch (Exception ex)

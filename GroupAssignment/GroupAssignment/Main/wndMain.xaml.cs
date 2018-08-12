@@ -62,6 +62,8 @@ namespace GroupAssignment.Main
             try
             {
                 logic.displayItemScreen();
+                comboBoxItemSelection.ItemsSource = logic.itemList;
+
             }
             catch (Exception ex)
             {

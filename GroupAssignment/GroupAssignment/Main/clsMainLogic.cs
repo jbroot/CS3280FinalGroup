@@ -55,6 +55,10 @@ namespace GroupAssignment.Main
             Items.wndItems itemWindow = new Items.wndItems();
             itemWindow.ShowDialog();
 
+            int rows = 0;
+            itemList = itemLogic.GetItems(ref rows);
+            
+
         }
 
         /// <summary>
