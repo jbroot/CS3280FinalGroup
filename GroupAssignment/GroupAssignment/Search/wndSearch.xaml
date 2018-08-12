@@ -27,7 +27,7 @@
         <Label x:Name="labelInvoiceNumber" Content="Invoice Number" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="labelDate" Content="Date" HorizontalAlignment="Left" Margin="179,9,0,0" VerticalAlignment="Top"/>
         <Label x:Name="labelTotalCharge" Content="Total Charge" HorizontalAlignment="Left" Margin="346,9,0,0" VerticalAlignment="Top"/>
-        <TextBox Text="This form was the responsibility of Jesse, who didn't participate. You indicated we did not have to complete this form. We did add code so that you can select an invoice from the in voice number drop down and press select to open it in the main form." HorizontalAlignment="Left"  Margin="16,66,0,0" VerticalAlignment="Top" Height="68" Width="675" TextWrapping="Wrap" Foreground="Red" Grid.ColumnSpan="2"/>
+        <TextBox Text="Since Jesse had stopped responding, we were allowed to omit the search window. We added minimal functionality so that you can select an invoice from the in voice number drop down and press select to open it in the main form." HorizontalAlignment="Left"  Margin="16,66,0,0" VerticalAlignment="Top" Height="68" Width="675" TextWrapping="Wrap" Foreground="Red" Grid.ColumnSpan="2"/>
 
     </Grid>
 </Window>
