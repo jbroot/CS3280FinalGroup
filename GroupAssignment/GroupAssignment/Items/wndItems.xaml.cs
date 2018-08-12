@@ -184,13 +184,11 @@ namespace GroupAssignment.Items
         {
             try
             {
-                if (ItemDescTableDataGrid.SelectedItems.Count > 0)
-                {
-                    Item row = (Item)ItemDescTableDataGrid.SelectedItems[0];
-                    itemCodeText.Text = row.ItemCode;
-                    itemDescText.Text = row.ItemDesc;
-                    itemCostText.Text = row.ItemCost.ToString();
-                }
+                if (ItemDescTableDataGrid.SelectedItems.Count <= 0) return;
+                Item row = (Item)ItemDescTableDataGrid.SelectedItems[0];
+                itemCodeText.Text = row.ItemCode;
+                itemDescText.Text = row.ItemDesc;
+                itemCostText.Text = row.ItemCost.ToString();
             }
             catch (Exception ex)
             {
