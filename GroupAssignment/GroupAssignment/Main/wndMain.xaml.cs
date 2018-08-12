@@ -133,7 +133,6 @@ namespace GroupAssignment.Main
             try
             {
                 createInvoice();
-
                 buttonEdit.IsEnabled = false;
             }
             catch (Exception ex)
@@ -170,7 +169,7 @@ namespace GroupAssignment.Main
             try
             {
                 setScreenControls(true);
-                buttonEdit.IsEnabled = false;
+                buttonEdit.IsEnabled = false;                
             }
             catch (Exception ex)
             {
@@ -305,6 +304,8 @@ namespace GroupAssignment.Main
                 dataGridLineItems.IsEnabled = isEnabled;
 
                 buttonEdit.IsEnabled = ((logic.currentInvoice == null) ? false : true);
+
+                menuItems.IsEnabled = !buttonAdd.IsEnabled;
                 buttonDelete.IsEnabled = ((logic.currentInvoice != null && logic.currentInvoice.InvoiceNum != 0) ? true : false);
             }
             catch (Exception ex)
