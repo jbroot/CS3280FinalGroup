@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GroupAssignment.Items"
         mc:Ignorable="d"
-        Title="wndItems" Height="450" Width="800">
+        Title="wndItems" Height="450" Width="800" Background="#FF428EDA">
     <Grid>
-        <DataGrid Name="ItemDescTableDataGrid" HorizontalAlignment="Left" Height="345" Margin="52,26,0,0" VerticalAlignment="Top" Width="335" SelectionChanged="ItemDescTableDataGrid_SelectionChanged">
+        <DataGrid Name="ItemDescTableDataGrid" HorizontalAlignment="Left" Height="401" Margin="10,8,0,0" VerticalAlignment="Top" Width="437" SelectionChanged="ItemDescTableDataGrid_SelectionChanged"  >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Item Code" Width="*" Binding="{Binding ItemCode}"/>
-                <DataGridTextColumn Header="Item Description" Width="*" Binding="{Binding ItemDesc}"/>
-                <DataGridTextColumn Header="Item Cost" Width="*" Binding="{Binding ItemCost}"/>
+                <DataGridTextColumn x:Name="dataGridTextColumnItemCode" Header="Item Code" Width="*" Binding="{Binding ItemCode}" ClipboardContentBinding="{x:Null}" IsReadOnly="true"/>
+                <DataGridTextColumn Header="Item Description" Width="*" Binding="{Binding ItemDesc}" ClipboardContentBinding="{x:Null}" IsReadOnly="true"/>
+                <DataGridTextColumn Header="Item Cost" Width="*" Binding="{Binding ItemCost}" ClipboardContentBinding="{x:Null}" IsReadOnly="true"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button Name="addItemButton" Content="Add Item" HorizontalAlignment="Left" Margin="676,256,0,0" VerticalAlignment="Top" Width="75" Height="30" RenderTransformOrigin="2.061,3.771" Click="addItemButton_Click"/>

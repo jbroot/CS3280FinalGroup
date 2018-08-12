@@ -56,7 +56,7 @@ namespace GroupAssignment.Items
                 foreach (Item item in myLogic.itemList)
                 {
                     ItemDescTableDataGrid.Items.Add(item);
-                }                
+                }
             }
             catch (Exception ex)
             {
@@ -127,8 +127,7 @@ namespace GroupAssignment.Items
             }
             catch (Exception ex)
             {
-                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
-                    MethodInfo.GetCurrentMethod().Name, ex.Message);
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
         }
 
@@ -149,7 +148,7 @@ namespace GroupAssignment.Items
                     ErrorItemCode.Content = "That Item Name is not valid.";
                     return;
                 }
-                else if(newItem == -1)
+                else if (newItem == -1)
                 {
                     ErrorItemCode.Content = "That Item Name is currently used in an invoice.";
                     return;
@@ -183,10 +182,20 @@ namespace GroupAssignment.Items
 
         private void ItemDescTableDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            Item row = (Item) ItemDescTableDataGrid.SelectedItems[0];
-            itemCodeText.Text = row.ItemCode;
-            itemDescText.Text = row.ItemDesc;
-            itemCostText.Text = row.ItemCost.ToString();
+            try
+            {
+                if (ItemDescTableDataGrid.SelectedItems.Count > 0)
+                {
+                    Item row = (Item)ItemDescTableDataGrid.SelectedItems[0];
+                    itemCodeText.Text = row.ItemCode;
+                    itemDescText.Text = row.ItemDesc;
+                    itemCostText.Text = row.ItemCost.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
         }
 
         /*

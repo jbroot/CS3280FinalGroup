@@ -17,11 +17,11 @@
         /// Item Cost
         /// </summary>
         public double ItemCost { get; set; }
-        public Item(string itCode, string itDesc, double itCost)
+        public Item(string itemCode, string itemDesc, double itemCost)
         {
-            this.ItemCode = itCode;
-            this.ItemDesc = itDesc;
-            this.ItemCost = itCost;
+            this.ItemCode = itemCode;
+            this.ItemDesc = itemDesc;
+            this.ItemCost = itemCost;
         }
 
         /// <summary>

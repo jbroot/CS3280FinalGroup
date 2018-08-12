@@ -143,6 +143,8 @@ namespace GroupAssignment.Items
             try
             {
                 if (dbLink.UpdateItem(pKey, ItemDesc, cost) == -1) return null;
+
+
                 foreach (Item item in itemList)
                 {
                     if (item.ItemCode == pKey)

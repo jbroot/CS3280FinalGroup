@@ -111,9 +111,12 @@ namespace GroupAssignment.Search
             {
                 if (comboBoxInvoices.SelectedItem != null)
                 {
+                    
+                    //search.invoiceList = new List<Main.Invoice>();
+                    //dataGridInvoices.ItemsSource = search.invoiceList;
                     search.findInvoice(((Main.Invoice)comboBoxInvoices.SelectedItem).InvoiceNum);
-
-                    dataGridInvoices.Items.Refresh();
+                    
+                    //dataGridInvoices.Items.Refresh();
                 }
             }
             catch (Exception ex)
