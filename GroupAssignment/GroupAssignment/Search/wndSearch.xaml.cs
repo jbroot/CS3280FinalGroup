@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,21 +25,36 @@ namespace GroupAssignment.Search
         /// </summary>
         public Int32 InvoiceID { get; set;  }
 
-        clsSearchLogic myLogic;
+        clsSearchLogic search;
+        List<Main.Invoice> invoices;
 
-        clsSearchSQL searchSQL;
+        //clsSearchSQL searchSQL;
         public wndSearch()
         {
-            InitializeComponent();
-            myLogic = new clsSearchLogic();
-            searchSQL = new clsSearchSQL();
-            //for troubleshooting only
-            //test();
-        }
+            try
+            {
+                InitializeComponent();
+                search = new clsSearchLogic();
+                //searchSQL = new clsSearchSQL();
+
+                int rows = 0;
+                //invoices = new List<Main.Invoice>();
+                comboBoxInvoices.ItemsSource = search.invoiceList;
+                //dataGridInvoices.ItemsSource = invoices;
+                invoices = search.GetInvoices(ref rows);
+            }
+            
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+    //for troubleshooting only
+    //test();
+}
         /*
         /// <summary>
         /// Method to help troubleshoot. Delete before final submission
-        /// </summary>
+        /// </ummary>
         void test()
         {
             int rowsAffected = 0;
@@ -53,7 +69,21 @@ namespace GroupAssignment.Search
         /// <param name="e"></param>
         private void buttonSelect_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            try
+            {
+                InvoiceID = 0;
+                if (comboBoxInvoices.SelectedItem != null)
+                {
+                    InvoiceID = ((Main.Invoice)comboBoxInvoices.SelectedItem).InvoiceNum;
+                }
+
+                DialogResult = true;
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
         }
 
         /// <summary>
@@ -63,8 +93,52 @@ namespace GroupAssignment.Search
         /// <param name="e"></param>
         private void buttonCancel_Click(object sender, RoutedEventArgs e)
         {
-            InvoiceID = 0;
-            this.Close();
+            try { 
+                InvoiceID = 0;
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+        private void comboBoxInvoices_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //populate datagrid
+            //dataGridInvoices.ItemsSource = ;
+            try
+            {
+                if (comboBoxInvoices.SelectedItem != null)
+                {
+                    search.findInvoice(((Main.Invoice)comboBoxInvoices.SelectedItem).InvoiceNum);
+
+                    dataGridInvoices.Items.Refresh();
+                }
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Handles all errors for this class
+        /// </summary>
+        /// <param name="sClass"></param>
+        /// <param name="sMethod"></param>
+        /// <param name="sMessage"></param>
+        private void HandleError(string sClass, string sMethod, string sMessage)
+        {
+            try
+            {
+                System.IO.File.AppendAllText(@"C:\Error.txt", Environment.NewLine + "HandleError Exception: " + sMessage);
+            }
+            catch (System.Exception ex)
+            {
+                System.IO.File.AppendAllText(@"C:\Error.txt", Environment.NewLine + "HandleError Exception: " + ex.Message);
+            }
+
         }
     }
 }

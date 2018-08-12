@@ -40,8 +40,7 @@ namespace GroupAssignment.Items
             }
             catch (Exception ex)
             {
-                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
-                    MethodInfo.GetCurrentMethod().Name, ex.Message);
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
         }
 

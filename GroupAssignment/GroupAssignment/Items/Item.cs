@@ -23,5 +23,15 @@
             this.ItemDesc = itDesc;
             this.ItemCost = itCost;
         }
+
+        /// <summary>
+        /// Overrides the string method to return the item description for picklists
+        /// </summary>
+        /// <returns>String description of the item</returns>
+        override
+        public string ToString()
+        {
+            return this.ItemDesc;
+        }
     }
 }

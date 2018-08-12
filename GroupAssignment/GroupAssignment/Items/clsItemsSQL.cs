@@ -10,10 +10,6 @@ namespace GroupAssignment.Items
         /// Association with the class that directly opens the database
         /// </summary>
         ConnectDB db;
-        /// <summary>
-        /// Associates with the business logic class
-        /// </summary>
-        clsItemsLogic myLogic;
 
         public clsItemsSQL()
         {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,217 +17,457 @@ using System.Windows.Shapes;
 
 namespace GroupAssignment.Main
 {
-   
+
     /// <summary>
     /// Interaction logic for wndMain.xaml
     /// </summary>
     public partial class wndMain : Window
     {
-        
+
 
         /// <summary>
         /// Reference to the clsMainLogic for easier usage throughout the class
         /// </summary>
         clsMainLogic logic { get; set; }
-        
-        List<Items.Item> items { get; set; }
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public wndMain()
         {
-            InitializeComponent();
-            logic = new clsMainLogic();
-            logic.lineItems = new ObservableCollection<LineItem>();
-            dataGridLineItems.Items.Clear();
-            dataGridLineItems.ItemsSource = logic.lineItems;
-                
-           // dataaccess = new clsMainSQL();
-            //items = logic.
-            //comboBoxItemSelection.ItemsSource = logic.;
+            try
+            {
+                InitializeComponent();
+                logic = new clsMainLogic();
+                //logic.lineItems = new ObservableCollection<LineItem>();
+                dataGridLineItems.Items.Clear();
+                dataGridLineItems.ItemsSource = logic.lineItems;
+                comboBoxItemSelection.ItemsSource = logic.itemList;
+                setScreenControls(false);
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
 
-            //List<Flight> Flights = fa.getFlights();
-            //comboBoxFlights.ItemsSource = Flights;
-
-
+            }
         }
 
+        /// <summary>
+        /// Click event handler for showing the edit items screen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void menuItems_Click(object sender, RoutedEventArgs e)
         {
-            logic.displayItemScreen();
-        }
-        private void menuSearch_Click(object sender, RoutedEventArgs e)
-        {
-            logic.displaySearchScreen();
+            try
+            {
+                logic.displayItemScreen();
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+
+            }
         }
 
+        /// <summary>
+        /// Click ent handler for showing the search screen and getting results
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuSearch_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                setScreenControls(true);
+                logic.displaySearchScreen();
+
+                if (logic.currentInvoice != null)
+                {
+                    labelInvoiceNumberData.Content = logic.currentInvoice.InvoiceNum.ToString();
+                    datePickerInvoiceDate.Text = logic.currentInvoice.InvoiceDate.ToShortDateString();
+                    textBoxTotal.Text = logic.getTotal().ToString();
+                    dataGridLineItems.Items.Refresh();
+                }
+                //dataGridLineItems.Items.Clear();
+                dataGridLineItems.ItemsSource = logic.lineItems;
+                //dataGridLineItems.Items.Refresh();
+                setScreenControls(false);
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// detects the change of sleection of an item
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxItemSelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            /*try
+            try
             {
-                textBoxPassengerSeat.Text = "";
-                labelAircraft.Content = ((Flight)comboBoxFlights.SelectedItem).Flight_Number;
-                populatePassengers((Flight)comboBoxFlights.SelectedItem);
-                if (sender == comboBoxFlights)
+                textBoxPrice.Text = "";
+                if (comboBoxItemSelection.SelectedItem != null)
                 {
-                    ComboBox cb = (ComboBox)sender;
-                    if (cb.SelectedItem != null)
+                    textBoxPrice.Text = ((Items.Item)comboBoxItemSelection.SelectedItem).ItemCost.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Event handler for new button to creates a new invoice
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonNew_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                createInvoice();
+
+                buttonEdit.IsEnabled = false;
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Creates a call to get a new invoice
+        /// </summary>
+        private void createInvoice()
+        {
+            try
+            {
+                clearScreen(!buttonAdd.IsEnabled);
+                setScreenControls(true);
+                logic.createInvoice();
+                labelInvoiceNumberData.Content = "TBD";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Click handler for the edit button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonEdit_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                setScreenControls(true);
+                buttonEdit.IsEnabled = false;
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+        private Boolean hasGridErrors()
+        {
+            try
+            {
+                var errors = (from c in (from object i in dataGridLineItems.ItemsSource select dataGridLineItems.ItemContainerGenerator.ContainerFromItem(i)) where c != null select Validation.GetHasError(c)).FirstOrDefault(x => x);
+                if (errors)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Verifies and saves the invoice
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonSave_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+                if (hasGridErrors())
+                {
+                    MessageBox.Show("There is a problem with one or more line items. Please correct the error before saving.", "Data Error", MessageBoxButton.OK);
+                    return;
+                }
+
+                //check date
+                DateTime invoiceDate;
+                if (datePickerInvoiceDate.SelectedDate == null)
+                {
+                    MessageBox.Show("Please set an invoice date", "Set Date", MessageBoxButton.OK);
+                    return;
+                }
+                else
+                {
+                    invoiceDate = (DateTime)datePickerInvoiceDate.SelectedDate;
+                    logic.currentInvoice.InvoiceDate = invoiceDate;
+                }
+
+                //check line items
+                if (logic.lineItems.Count == 0)
+                {
+                    MessageBox.Show("Cannot save a blank invoice. Please add items to the invoice.", "No Line Items", MessageBoxButton.OK);
+                    return;
+                }
+
+                //check invoice number (insert or update)
+                logic.saveInvoice(); // labelInvoiceNumberData.Content.ToString(), invoiceDate);
+                labelInvoiceNumberData.Content = logic.currentInvoice.InvoiceNum.ToString();
+                setScreenControls(false);
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Clears the current invoice information from the screen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonClear_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                clearScreen(false);
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Clears the screen controls for a new invoice
+        /// </summary>
+        private void clearScreen(Boolean skipPrompt)
+        {
+            try
+            {
+                if (skipPrompt || MessageBox.Show("Are you sure you want to clear the current invoice information and line items?", "Clear Invoice", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+                {
+                    labelInvoiceNumberData.Content = "";
+                    datePickerInvoiceDate.Text = "";
+                    comboBoxItemSelection.Text = "";
+                    textBoxPrice.Text = "";
+
+                    textBoxTotal.Text = "";
+                    logic.currentInvoice = null;
+                    logic.lineItems.Clear(); // = new ObservableCollection<LineItem>();
+
+                    //dataGridLineItems.Items.Clear();
+                    dataGridLineItems.Items.Refresh();
+                }
+                setScreenControls(false);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// sets the controls for editing enabled/disabled
+        /// </summary>
+        /// <param name="isEnabled"></param>
+        private void setScreenControls(Boolean isEnabled)
+        {
+            try
+            {
+                //labelInvoiceNumberData.IsEnabled = isEnabled;
+                datePickerInvoiceDate.IsEnabled = isEnabled;
+                comboBoxItemSelection.IsEnabled = isEnabled;
+                buttonAdd.IsEnabled = isEnabled;
+                datePickerInvoiceDate.IsEnabled = isEnabled;
+                buttonSave.IsEnabled = isEnabled;
+                dataGridLineItems.IsEnabled = isEnabled;
+
+                buttonEdit.IsEnabled = ((logic.currentInvoice == null) ? false : true);
+                buttonDelete.IsEnabled = ((logic.currentInvoice != null && logic.currentInvoice.InvoiceNum != 0) ? true : false);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+
+        }
+
+        /// <summary>
+        /// add button click event handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonAdd_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                addItem();
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// adds the currently selected item to the invoice
+        /// </summary>
+        private void addItem()
+        {
+            try
+            {
+                if (comboBoxItemSelection.SelectedItem == null)
+                {
+                    MessageBox.Show("Please select and item to add", "Cannot add item", MessageBoxButton.OK);
+                    return;
+                }
+
+                logic.addLineItem((Items.Item)comboBoxItemSelection.SelectedItem);
+                dataGridLineItems.Items.Refresh();
+                comboBoxItemSelection.SelectedIndex = -1;
+                textBoxTotal.Text = logic.getTotal().ToString();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+
+        }
+
+        /// <summary>
+        /// creates the grid column headers
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dataGridLineItems_AutoGeneratedColumns(object sender, EventArgs e)
+        {
+            try
+            {
+                dataGridLineItems.Columns[0].Header = "Code";
+                dataGridLineItems.Columns[1].Header = "Description";
+                dataGridLineItems.Columns[2].Header = "Cost";
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+
+        }
+
+        /// <summary>
+        /// deletes the current invoice
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonDelete_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //will prompt to delete the current invoice
+                if (logic.currentInvoice != null)
+                {
+                    if (MessageBox.Show("Are you sure you want to delete the current invoice?", "Delete Invoice", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
                     {
-                        comboBoxPassenger.IsEnabled = true;
-                        buttonAddPassenger.IsEnabled = true;
-                        if (cb.SelectedValue.ToString().Contains("767"))
-                        {
-                            draw767();
-                        }
-                        if (cb.SelectedValue.ToString().Contains("380"))
-                        {
-                            draw380();
-                        }
+                        //delete lines
+                        logic.deleteInvoice();
+                        logic.currentInvoice = null;
+                        clearScreen(true);
+
+
                     }
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
-            }*/
-        }
-
-        private void buttonNew_Click(object sender, RoutedEventArgs e)
-        {
-            createInvoice();
-        }
-
-        private void createInvoice()
-        {
-            clearScreen();
-            logic.createInvoice();
-
-            labelInvoiceNumberData.Content = "TBD";
-            
-        }
-
-        private void buttonEdit_Click(object sender, RoutedEventArgs e)
-        {
-            setScreenControls(true);
-        }
-
-        private void buttonSave_Click(object sender, RoutedEventArgs e)
-        {
-            saveInvoice();
-        }
-
-        private void saveInvoice()
-        {
-            //determine if existing or new and save or update
-        }
-        private void buttonClear_Click(object sender, RoutedEventArgs e)
-        {
-            clearScreen();
-        }
-
-        private void clearScreen()
-        {
-            labelInvoiceNumberData.Content = "TBD";
-            datePickerInvoiceDate.Text = "";
-            comboBoxItemSelection.Text = "";
-            textBoxPrice.Text = "";
-
-            textBoxTotal.Text = "";
-            logic.lineItems.Clear(); // = new ObservableCollection<LineItem>();
-            
-            //dataGridLineItems.Items.Clear();
-            dataGridLineItems.Items.Refresh();
-
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
 
         }
 
-        private void setScreenControls(Boolean isEnabled)
+        /// <summary>
+        /// confirms that the user wants to delete the row from the invoice
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dataGridLineItems_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            labelInvoiceNumberData.IsEnabled = isEnabled;
-            datePickerInvoiceDate.IsEnabled = isEnabled;
-            comboBoxItemSelection.IsEnabled = isEnabled;
-            buttonAdd.IsEnabled = isEnabled;
-            datePickerInvoiceDate.IsEnabled = isEnabled;
-            buttonSave.IsEnabled = isEnabled;
-            dataGridLineItems.IsEnabled = isEnabled;
+            try
+            {
+                DataGrid dg = sender as DataGrid;
+                if (dg != null)
+                {
+                    DataGridRow dgr = (DataGridRow)(dg.ItemContainerGenerator.ContainerFromIndex(dg.SelectedIndex));
+                    if (e.Key == Key.Delete && !dgr.IsEditing)
+                    {
+                        // User is attempting to delete the row
+                        var result = MessageBox.Show("Are you sure you want to delete the current item(s)?", "Delete row", MessageBoxButton.OKCancel);
+                        e.Handled = (result == MessageBoxResult.Cancel);
 
 
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
         }
 
-        private void buttonAdd_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// updates the total when the selection changes (like when a row is deleted)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dataGridLineItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            addItem();
-        }
-        
-        private void addItem()
-        {
+            try
+            {
 
-            //just mock code for testing, needs to be replaced with the real stuff
-            Items.Item i = new Items.Item("a", "Something good", 59.99);
-            //i.ItemCode = "a";
-            //i.ItemCost = 59.99;
-            //i.ItemDesc = "something good";
-                
+                textBoxTotal.Text = logic.getTotal().ToString();
 
-
-            LineItem li = new LineItem();
-            li.InvoiceNum = 1;
-            li.item = i;
-            //liItemCode = "a";
-            li.LineItemNum = 2;
-            logic.lineItems.Add(li);
-            //String[] s = new string[] { "a", "b", "c" };
-           // dataGridLineItems.Items.Add(s);
-            dataGridLineItems.Items.Refresh();
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
         }
 
-        private void dataGridLineItems_AutoGeneratedColumns(object sender, EventArgs e)
+        /// <summary>
+        /// Handles all errors for this class
+        /// </summary>
+        /// <param name="sClass"></param>
+        /// <param name="sMethod"></param>
+        /// <param name="sMessage"></param>
+        private void HandleError(string sClass, string sMethod, string sMessage)
         {
-            dataGridLineItems.Columns[0].Header = "Code";
-            dataGridLineItems.Columns[1].Header = "Description";
-            dataGridLineItems.Columns[2].Header = "Cost";
-
-        }
-
-        private void buttonDelete_Click(object sender, RoutedEventArgs e)
-        {
-            //will prompt to delete the current invoice
-
-        }
-
-        private void buttonTestSql_Click(object sender, RoutedEventArgs e)
-        {
-            /*clsMainSQL sql = new clsMainSQL();
-
-            String a = sql.deleteAllLineItemByInvoiceId(44);
-            String b = sql.deleteInvoice(100);
-            String c = sql.deleteLineItemById(55);
-
-
-            String d = sql.insertInvoice(new DateTime(2018, 8, 1));
-            String f = sql.insertLineItem(5019, 1, "A");
-
-            String r = sql.selectInvoiceByNumber(5000);
-            String g = sql.selectLineItemsByInvoiceNumber(5000);
-
-            String h = sql.updateInvoice(5000, new DateTime(2018, 8,1));
-            String i = sql.updateLineItem(5019, 1, "C");
-
-            
-
-            ConnectDB db = new ConnectDB();
-            db.ExecuteNonQuery(d);
-            db.ExecuteNonQuery(f);
-            int row1 = 0;
-            DataSet r1 = db.ExecuteSQLStatement(r, ref row1);
-            int row2 = 0;
-            DataSet r2 = db.ExecuteSQLStatement(g, ref row2);
-
-            db.ExecuteNonQuery(h);
-            db.ExecuteNonQuery(i);
-
-            String blah = "";*/
-
-
-
+            try
+            {
+                System.IO.File.AppendAllText(@"C:\Error.txt", Environment.NewLine + "HandleError Exception: " + sMessage);
+            }
+            catch (System.Exception ex)
+            {
+                System.IO.File.AppendAllText(@"C:\Error.txt", Environment.NewLine + "HandleError Exception: " + ex.Message);
+            }
 
         }
     }

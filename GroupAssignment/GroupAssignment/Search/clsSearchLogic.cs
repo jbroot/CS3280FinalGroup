@@ -18,7 +18,7 @@ namespace GroupAssignment.Search
         /// <summary>
         /// List of invoices
         /// </summary>
-        List<Invoice> invoiceList;
+        public List<Invoice> invoiceList;
         /// <summary>
         /// Length of invoiceList
         /// </summary>
@@ -40,6 +40,25 @@ namespace GroupAssignment.Search
             }
         }
 
+        public void findInvoice(int invoiceNum)
+        {
+            try { 
+                invoiceList = new List<Invoice>();
+                int rows = 0;
+                DataSet ds = dbLink.SearchByInvoice(invoiceNum, ref rows);
+                for (int i = 0; i < rows; i++)
+                {
+                    Invoice newInvoice = new Invoice((int)ds.Tables[0].Rows[i][0], (DateTime)ds.Tables[0].Rows[i][1]);
+                    invoiceList.Add(newInvoice);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+
+        }
+
         /// <summary>
         /// Returns a list of all invoices
         /// </summary>
@@ -54,13 +73,11 @@ namespace GroupAssignment.Search
 
                 for (int i = 0; i < rowsAffected; i++)
                 {
-                    Invoice newInvoice = new Invoice((int)myData.Tables[0].Rows[i][0],
-                        (DateTime)myData.Tables[0].Rows[i][1]);
+                    Invoice newInvoice = new Invoice((int)myData.Tables[0].Rows[i][0], (DateTime)myData.Tables[0].Rows[i][1]);
                     newInvoiceList.Add(newInvoice);
                 }
                 return newInvoiceList;
             }
-
             catch (Exception ex)
             {
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);

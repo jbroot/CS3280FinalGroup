@@ -26,10 +26,5 @@ namespace GroupAssignment.Main
         /// </summary>
         public Items.Item item { get; set; }
         //public String ItemCode { get; set; }
-
-        
-
-
-
     }
 }

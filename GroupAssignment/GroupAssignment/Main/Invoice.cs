@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,7 +31,14 @@ namespace GroupAssignment.Main
         /// </summary>
         public Invoice()
         {
-            LineItems = new List<LineItem>();
+            try
+            {
+                LineItems = new List<LineItem>();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
 
         }
 
@@ -41,8 +49,33 @@ namespace GroupAssignment.Main
         /// <param name="invoiceDate"></param>
         public Invoice(Int32 invoiceNum, DateTime invoiceDate)
         {
-            this.InvoiceNum = invoiceNum;
-            this.InvoiceDate = invoiceDate;
+            try
+            {
+                this.InvoiceNum = invoiceNum;
+                this.InvoiceDate = invoiceDate;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
         }
+
+        /// <summary>
+        /// To string method used by the combo boxes to display the object
+        /// </summary>
+        /// <returns>String of the object</returns>
+        override
+        public String ToString()
+        {
+            try
+            {
+                return InvoiceNum.ToString();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
     }
 }

@@ -25,8 +25,8 @@ namespace GroupAssignment.Search
             {
                 db = new ConnectDB();
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) { 
+            
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }
@@ -40,11 +40,12 @@ namespace GroupAssignment.Search
         /// <returns>Dataset[InvoiceNum][InvoiceDate][totalCost]</returns>
         public DataSet Search(int invoiceNum, DateTime date, ref int rowsAffected)
         {
-            try {
+            try
+            {
                 return db.ExecuteSQLStatement("SELECT Invoices.InvoiceNum, Invoices.InvoiceDate, Sum(ItemDesc.Cost) AS SumOfCost " +
                     "FROM Invoices INNER JOIN(ItemDesc INNER JOIN LineItems ON ItemDesc.ItemCode = LineItems.ItemCode) ON Invoices.InvoiceNum = LineItems.InvoiceNum " +
-                    "WHERE Invoices.InvoiceNum = " + invoiceNum + 
-                    " AND InvoiceDate = #" + date.ToShortDateString() + 
+                    "WHERE Invoices.InvoiceNum = " + invoiceNum +
+                    " AND InvoiceDate = #" + date.ToShortDateString() +
                     "# GROUP BY Invoices.InvoiceNum, Invoices.InvoiceDate" + ";", ref rowsAffected);
             }
             catch (Exception ex)
@@ -52,6 +53,22 @@ namespace GroupAssignment.Search
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }
+
+        public DataSet SearchByInvoice(int invoiceNum, ref int rowsAffected)
+        {
+            try
+            {
+                return db.ExecuteSQLStatement("SELECT Invoices.InvoiceNum, Invoices.InvoiceDate, Sum(ItemDesc.Cost) AS SumOfCost " +
+                    "FROM Invoices INNER JOIN(ItemDesc INNER JOIN LineItems ON ItemDesc.ItemCode = LineItems.ItemCode) ON Invoices.InvoiceNum = LineItems.InvoiceNum " +
+                    "WHERE Invoices.InvoiceNum = " + invoiceNum +
+                    " GROUP BY Invoices.InvoiceNum, Invoices.InvoiceDate" + ";", ref rowsAffected);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
 
         /// <summary>
         /// Displays all Invoices with the total cost as a third column
