@@ -37,6 +37,10 @@ namespace GroupAssignment.Search
             }
         }
 
+        /// <summary>
+        /// Finds an invoice
+        /// </summary>
+        /// <param name="invoiceNum"></param>
         public void findInvoice(int invoiceNum)
         {
             try { 

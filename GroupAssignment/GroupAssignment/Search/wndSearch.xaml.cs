@@ -35,12 +35,9 @@ namespace GroupAssignment.Search
             {
                 InitializeComponent();
                 search = new clsSearchLogic();
-                //searchSQL = new clsSearchSQL();
 
                 int rows = 0;
-                //invoices = new List<Main.Invoice>();
                 comboBoxInvoices.ItemsSource = search.invoiceList;
-                //dataGridInvoices.ItemsSource = invoices;
                 invoices = search.GetInvoices(ref rows);
             }
             
@@ -98,18 +95,11 @@ namespace GroupAssignment.Search
         /// <param name="e"></param>
         private void comboBoxInvoices_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //populate datagrid
-            //dataGridInvoices.ItemsSource = ;
             try
             {
                 if (comboBoxInvoices.SelectedItem != null)
                 {
-                    
-                    //search.invoiceList = new List<Main.Invoice>();
-                    //dataGridInvoices.ItemsSource = search.invoiceList;
                     search.findInvoice(((Main.Invoice)comboBoxInvoices.SelectedItem).InvoiceNum);
-                    
-                    //dataGridInvoices.Items.Refresh();
                 }
             }
             catch (Exception ex)
