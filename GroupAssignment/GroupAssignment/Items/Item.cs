@@ -17,6 +17,13 @@
         /// Item Cost
         /// </summary>
         public double ItemCost { get; set; }
+
+        /// <summary>
+        /// Constructor for Item
+        /// </summary>
+        /// <param name="itemCode"></param>
+        /// <param name="itemDesc"></param>
+        /// <param name="itemCost"></param>
         public Item(string itemCode, string itemDesc, double itemCost)
         {
             this.ItemCode = itemCode;
