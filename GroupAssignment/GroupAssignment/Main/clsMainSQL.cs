@@ -219,7 +219,7 @@ namespace GroupAssignment.Main
         /// <summary>
         /// Returns the max invoice number
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The highest ivoice number</returns>
         public int maxInvoiceNumber()
         {
             try
