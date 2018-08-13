@@ -87,6 +87,15 @@ namespace GroupAssignment.Main
         }
 
         /// <summary>
+        /// refreshes the current invoice information to make sure the product data is correct
+        /// </summary>
+        public  void refreshCurrentInvoice()
+        {
+            currentInvoice = sql.selectInvoiceByNumber(currentInvoice.InvoiceNum);
+            lineItems = currentInvoice.LineItems;
+        }
+
+        /// <summary>
         /// Deletes the currently open invoice
         /// </summary>
         public void deleteInvoice()

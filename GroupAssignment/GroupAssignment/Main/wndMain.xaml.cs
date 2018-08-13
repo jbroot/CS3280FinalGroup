@@ -63,6 +63,7 @@ namespace GroupAssignment.Main
             {
                 logic.displayItemScreen();
                 comboBoxItemSelection.ItemsSource = logic.itemList;
+                refreshInvoice();
 
             }
             catch (Exception ex)
@@ -70,6 +71,28 @@ namespace GroupAssignment.Main
                 HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
 
             }
+        }
+
+        /// <summary>
+        /// refreshes the current invoice to update the page
+        /// </summary>
+        private void refreshInvoice()
+        {
+            setScreenControls(true);
+            //logic.displaySearchScreen();
+
+            if (logic.currentInvoice != null)
+            {
+                labelInvoiceNumberData.Content = logic.currentInvoice.InvoiceNum.ToString();
+                datePickerInvoiceDate.Text = logic.currentInvoice.InvoiceDate.ToShortDateString();
+                textBoxTotal.Text = logic.getTotal().ToString();
+                logic.refreshCurrentInvoice();
+                dataGridLineItems.ItemsSource = logic.lineItems;
+                dataGridLineItems.Items.Refresh();
+                textBoxTotal.Text = logic.getTotal().ToString();
+
+            }
+            setScreenControls(false);
         }
 
         /// <summary>
@@ -81,15 +104,17 @@ namespace GroupAssignment.Main
         {
             try
             {
+                
                 setScreenControls(true);
                 logic.displaySearchScreen();
 
                 if (logic.currentInvoice != null)
                 {
-                    labelInvoiceNumberData.Content = logic.currentInvoice.InvoiceNum.ToString();
+                    refreshInvoice();
+                    /*labelInvoiceNumberData.Content = logic.currentInvoice.InvoiceNum.ToString();
                     datePickerInvoiceDate.Text = logic.currentInvoice.InvoiceDate.ToShortDateString();
                     textBoxTotal.Text = logic.getTotal().ToString();
-                    dataGridLineItems.Items.Refresh();
+                    dataGridLineItems.Items.Refresh();*/
                 }
                 //dataGridLineItems.Items.Clear();
                 dataGridLineItems.ItemsSource = logic.lineItems;
