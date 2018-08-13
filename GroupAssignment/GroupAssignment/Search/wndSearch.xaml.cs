@@ -1,17 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace GroupAssignment.Search
 {
@@ -25,10 +16,19 @@ namespace GroupAssignment.Search
         /// </summary>
         public Int32 InvoiceID { get; set;  }
 
+        /// <summary>
+        /// Business logic for the search folder
+        /// </summary>
         clsSearchLogic search;
+
+        /// <summary>
+        /// List of invoices
+        /// </summary>
         List<Main.Invoice> invoices;
 
-        //clsSearchSQL searchSQL;
+        /// <summary>
+        /// Initializes Search Window
+        /// </summary>
         public wndSearch()
         {
             try
@@ -48,19 +48,7 @@ namespace GroupAssignment.Search
             {
                 HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
-    //for troubleshooting only
-    //test();
-}
-        /*
-        /// <summary>
-        /// Method to help troubleshoot. Delete before final submission
-        /// </ummary>
-        void test()
-        {
-            int rowsAffected = 0;
-            DateTime date = new DateTime(2018, 4, 23);
-            searchSQL.Search(5000, date, ref rowsAffected);
-        }*/
+        }
 
         /// <summary>
         /// Sets the invoice id which will be able to be used by the calling window to pull up the invoice and associated information
@@ -103,6 +91,11 @@ namespace GroupAssignment.Search
             }
         }
 
+        /// <summary>
+        /// Actions to take when invoices combobox selection is changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxInvoices_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //populate datagrid

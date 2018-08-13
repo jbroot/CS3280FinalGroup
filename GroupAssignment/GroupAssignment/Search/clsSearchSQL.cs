@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using GroupAssignment.Main;
 
 namespace GroupAssignment.Search
 {
@@ -54,6 +49,12 @@ namespace GroupAssignment.Search
             }
         }
 
+        /// <summary>
+        /// Searches by Invoice
+        /// </summary>
+        /// <param name="invoiceNum"></param>
+        /// <param name="rowsAffected"></param>
+        /// <returns></returns>
         public DataSet SearchByInvoice(int invoiceNum, ref int rowsAffected)
         {
             try
@@ -107,6 +108,10 @@ namespace GroupAssignment.Search
             }
         }
 
+        /// <summary>
+        /// Returns the max invoice number
+        /// </summary>
+        /// <returns></returns>
         public string MaxInvoiceNum()
         {
             try
