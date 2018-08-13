@@ -194,24 +194,7 @@ namespace GroupAssignment.Main
             }
         }
 
-        private Boolean hasGridErrors()
-        {
-            try
-            {
-                var errors = (from c in (from object i in dataGridLineItems.ItemsSource select dataGridLineItems.ItemContainerGenerator.ContainerFromItem(i)) where c != null select Validation.GetHasError(c)).FirstOrDefault(x => x);
-                if (errors)
-                {
-                    return true;
-                }
-                return false;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
-            }
-        }
-
-        /// <summary>
+                /// <summary>
         /// Verifies and saves the invoice
         /// </summary>
         /// <param name="sender"></param>
@@ -220,13 +203,6 @@ namespace GroupAssignment.Main
         {
             try
             {
-
-                if (hasGridErrors())
-                {
-                    MessageBox.Show("There is a problem with one or more line items. Please correct the error before saving.", "Data Error", MessageBoxButton.OK);
-                    return;
-                }
-
                 //check date
                 DateTime invoiceDate;
                 if (datePickerInvoiceDate.SelectedDate == null)
