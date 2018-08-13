@@ -25,6 +25,5 @@ namespace GroupAssignment.Main
         /// Item object associated to LineItem
         /// </summary>
         public Items.Item item { get; set; }
-        //public String ItemCode { get; set; }
     }
 }
