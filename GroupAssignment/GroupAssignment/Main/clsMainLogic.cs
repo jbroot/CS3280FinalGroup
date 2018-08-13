@@ -73,14 +73,7 @@ namespace GroupAssignment.Main
                 if (invoiceid != 0)
                 {
                     currentInvoice = sql.selectInvoiceByNumber(invoiceid);
-                    //currentInvoice.LineItems = 
                     lineItems = currentInvoice.LineItems;
-                    
-
-                    //do something to update the scrren
-
-                    //lock the controls
-                    
                 }
 
             }
@@ -120,6 +113,7 @@ namespace GroupAssignment.Main
         public Invoice createInvoice()
         {
             currentInvoice = new Invoice();
+            //lineItems = currentInvoice.LineItems;
             return currentInvoice;
         }
         

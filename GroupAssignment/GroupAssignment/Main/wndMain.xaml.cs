@@ -39,7 +39,6 @@ namespace GroupAssignment.Main
             {
                 InitializeComponent();
                 logic = new clsMainLogic();
-                //logic.lineItems = new ObservableCollection<LineItem>();
                 dataGridLineItems.Items.Clear();
                 dataGridLineItems.ItemsSource = logic.lineItems;
                 comboBoxItemSelection.ItemsSource = logic.itemList;
@@ -90,7 +89,6 @@ namespace GroupAssignment.Main
                 dataGridLineItems.ItemsSource = logic.lineItems;
                 dataGridLineItems.Items.Refresh();
                 textBoxTotal.Text = logic.getTotal().ToString();
-
             }
             setScreenControls(false);
         }
@@ -249,8 +247,7 @@ namespace GroupAssignment.Main
                     return;
                 }
 
-                //check invoice number (insert or update)
-                logic.saveInvoice(); // labelInvoiceNumberData.Content.ToString(), invoiceDate);
+                logic.saveInvoice(); 
                 labelInvoiceNumberData.Content = logic.currentInvoice.InvoiceNum.ToString();
                 setScreenControls(false);
             }
@@ -293,9 +290,7 @@ namespace GroupAssignment.Main
 
                     textBoxTotal.Text = "";
                     logic.currentInvoice = null;
-                    logic.lineItems.Clear(); // = new ObservableCollection<LineItem>();
-
-                    //dataGridLineItems.Items.Clear();
+                    logic.lineItems.Clear(); 
                     dataGridLineItems.Items.Refresh();
                 }
                 setScreenControls(false);
@@ -314,7 +309,6 @@ namespace GroupAssignment.Main
         {
             try
             {
-                //labelInvoiceNumberData.IsEnabled = isEnabled;
                 datePickerInvoiceDate.IsEnabled = isEnabled;
                 comboBoxItemSelection.IsEnabled = isEnabled;
                 buttonAdd.IsEnabled = isEnabled;
@@ -414,8 +408,6 @@ namespace GroupAssignment.Main
                         logic.deleteInvoice();
                         logic.currentInvoice = null;
                         clearScreen(true);
-
-
                     }
                 }
             }
@@ -444,8 +436,6 @@ namespace GroupAssignment.Main
                         // User is attempting to delete the row
                         var result = MessageBox.Show("Are you sure you want to delete the current item(s)?", "Delete row", MessageBoxButton.OKCancel);
                         e.Handled = (result == MessageBoxResult.Cancel);
-
-
                     }
                 }
             }
