@@ -46,5 +46,6 @@
         <Button x:Name="buttonSave" Content="Save" HorizontalAlignment="Left" Margin="368,0,0,11" VerticalAlignment="Bottom" Width="75" Click="buttonSave_Click"/>
         <Button x:Name="buttonClear" Content="Clear" HorizontalAlignment="Left" Margin="448,0,0,11" VerticalAlignment="Bottom" Width="75" Click="buttonClear_Click"/>
         <Button x:Name="buttonDelete" Content="Delete Invoice" HorizontalAlignment="Left" Margin="172,0,0,11" VerticalAlignment="Bottom" Width="90" Click="buttonDelete_Click"/>
+        <Label Content="To remove an item, select it in the list and press delete on the keyboard" HorizontalAlignment="Right" Margin="0,88,13,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
