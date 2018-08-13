@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GroupAssignment.Items"
         mc:Ignorable="d"
-        Title="wndItems" Height="450" Width="800" Background="#FF428EDA">
-    <Grid>
+        Title="Items" Height="450" Width="800" Background="#FF428EDA" ResizeMode="CanMinimize">
+    <Grid HorizontalAlignment="Stretch">
         <DataGrid Name="ItemDescTableDataGrid" HorizontalAlignment="Left" Height="401" Margin="10,8,0,0" VerticalAlignment="Top" Width="437" SelectionChanged="ItemDescTableDataGrid_SelectionChanged"  >
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="dataGridTextColumnItemCode" Header="Item Code" Width="*" Binding="{Binding ItemCode}" ClipboardContentBinding="{x:Null}" IsReadOnly="true"/>
