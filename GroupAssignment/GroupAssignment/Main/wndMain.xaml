@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GroupAssignment.Main"
         mc:Ignorable="d"
-        Title="wndMain" Height="450" Width="800" Background="#FF428EDA">
+        Title="Invoice Main" Height="450" Width="800" Background="#FF428EDA">
     <Grid>
         <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,0,0,0" Grid.ColumnSpan="2">
             <Menu DockPanel.Dock="Top">
