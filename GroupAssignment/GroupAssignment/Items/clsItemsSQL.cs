@@ -50,13 +50,22 @@ namespace GroupAssignment.Items
         /// Deletes an ItemCode pKey from the database
         /// </summary>
         /// <param name="pKey"></param>
-        /// <returns>Number of rows affected</returns>
+        /// <returns>InvoiceNum if item is in invoice, 1 if >0 rows affected or 0 if 0 or less rows affected</returns>
         public int DeleteItem(string pKey)
         {
             try
             {
-                if (db.ExecuteScalarSQL("select * from LineItems where ItemCode = '" + pKey + "';") != "") return -1;
-                return db.ExecuteNonQuery("DELETE FROM ItemDesc WHERE ItemCode = '" + pKey + "';");
+                string invoiceNum = db.ExecuteScalarSQL("select InvoiceNum from LineItems where ItemCode = '" + pKey + "';");
+                //If item is in an invoice then return the invoice number
+                if (invoiceNum != "")
+                {
+                    return Int32.Parse(invoiceNum);
+                }
+                if (db.ExecuteNonQuery("DELETE FROM ItemDesc WHERE ItemCode = '" + pKey + "';") > 0)
+                {
+                    return 1;
+                }
+                else return 0;
             }
             catch (Exception ex)
             {

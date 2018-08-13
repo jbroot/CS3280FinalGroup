@@ -114,7 +114,8 @@ namespace GroupAssignment.Items
             try
             {
                 int delReturn = dbLink.DeleteItem(pKey);
-                if (delReturn == 0 || delReturn == -1) return delReturn;
+                //if error occurred
+                if (delReturn != 1) return delReturn;
                 
                 foreach (Item item in itemList)
                 {

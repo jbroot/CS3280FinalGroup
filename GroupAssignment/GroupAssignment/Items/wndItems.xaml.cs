@@ -148,9 +148,9 @@ namespace GroupAssignment.Items
                     ErrorItemCode.Content = "That Item Name is not valid.";
                     return;
                 }
-                else if (newItem == -1)
+                else if (newItem != 1)
                 {
-                    ErrorItemCode.Content = "That Item Name is currently used in an invoice.";
+                    ErrorItemCode.Content = "That Item Name is currently used in invoice number " + newItem.ToString() + ".";
                     return;
                 }
                 RefreshItemDataGrid();
