@@ -10,23 +10,24 @@
         <DataGrid Name="ItemDescTableDataGrid" HorizontalAlignment="Left"  Margin="10,10,0,10" VerticalAlignment="Stretch" Width="439" SelectionChanged="ItemDescTableDataGrid_SelectionChanged"  >
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="dataGridTextColumnItemCode" Header="Item Code" Width="*" Binding="{Binding ItemCode}" ClipboardContentBinding="{x:Null}" IsReadOnly="true"/>
-                <DataGridTextColumn Header="Item Description" Width="*" Binding="{Binding ItemDesc}" ClipboardContentBinding="{x:Null}" IsReadOnly="true"/>
+                <DataGridTextColumn Header="Item Description" Width="3*" Binding="{Binding ItemDesc}" ClipboardContentBinding="{x:Null}" IsReadOnly="true"/>
                 <DataGridTextColumn Header="Item Cost" Width="*" Binding="{Binding ItemCost}" ClipboardContentBinding="{x:Null}" IsReadOnly="true"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Name="addItemButton" Content="Add Item" HorizontalAlignment="Left" Margin="676,256,0,0" VerticalAlignment="Top" Width="75" Height="30" RenderTransformOrigin="2.061,3.771" Click="addItemButton_Click"/>
-        <Button Name="editItemButton" Content="Edit Item" HorizontalAlignment="Left" Margin="676,329,0,0" VerticalAlignment="Top" Width="75" Height="30" Click="editItemButton_Click"/>
-        <Button Name="deleteItembutton" Content="Delete Item" HorizontalAlignment="Left" Margin="541,329,0,0" VerticalAlignment="Top" Width="75" Height="30" Click="deleteItembutton_Click"/>
-        <TextBox Name="itemCodeText" HorizontalAlignment="Left" Height="24" Margin="583,64,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="168"/>
-        <TextBox Name="itemCostText" HorizontalAlignment="Left" Height="24" Margin="583,180,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="168"/>
-        <TextBox Name="itemDescText" HorizontalAlignment="Left" Height="24" Margin="583,126,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="168"/>
-        <Label Content="Item Name:" HorizontalAlignment="Left" Margin="504,63,0,0" VerticalAlignment="Top"/>
-        <Label Content="Item Description:" HorizontalAlignment="Left" Margin="476,125,0,0" VerticalAlignment="Top"/>
-        <Label Content="Item Cost:" HorizontalAlignment="Left" Margin="512,179,0,0" VerticalAlignment="Top"/>
-        <Label Name="ErrorItemCode" Content="  " HorizontalAlignment="Left" Height="30" Margin="470,93,0,0" VerticalAlignment="Top" Width="312" FontSize="10" HorizontalContentAlignment="Center"/>
-        <Label Name="ErrorItemDesc" Content="  " HorizontalAlignment="Left" Height="30" Margin="470,150,0,0" VerticalAlignment="Top" Width="312" FontSize="10" HorizontalContentAlignment="Center"/>
-        <Label Name="ErrorItemCost" Content="  " HorizontalAlignment="Left" Height="30" Margin="470,221,0,0" VerticalAlignment="Top" Width="312" FontSize="10" HorizontalContentAlignment="Center"/>
-
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Button Name="addItemButton" Content="Add Item" HorizontalAlignment="Left" Margin="676,256,0,0" VerticalAlignment="Top" Width="75" Height="30" RenderTransformOrigin="2.061,3.771" Click="addItemButton_Click"/>
+            <Button Name="editItemButton" Content="Edit Item" HorizontalAlignment="Left" Margin="676,329,0,0" VerticalAlignment="Top" Width="75" Height="30" Click="editItemButton_Click"/>
+            <Button Name="deleteItembutton" Content="Delete Item" HorizontalAlignment="Left" Margin="541,329,0,0" VerticalAlignment="Top" Width="75" Height="30" Click="deleteItembutton_Click"/>
+            <TextBox Name="itemCodeText" HorizontalAlignment="Left" Height="24" Margin="583,64,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="168"/>
+            <TextBox Name="itemCostText" HorizontalAlignment="Left" Height="24" Margin="583,180,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="168"/>
+            <TextBox Name="itemDescText" HorizontalAlignment="Left" Height="24" Margin="583,126,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="168"/>
+            <Label Content="Item Name:" HorizontalAlignment="Left" Margin="504,63,0,0" VerticalAlignment="Top"/>
+            <Label Content="Item Description:" HorizontalAlignment="Left" Margin="476,125,0,0" VerticalAlignment="Top"/>
+            <Label Content="Item Cost:" HorizontalAlignment="Left" Margin="512,179,0,0" VerticalAlignment="Top"/>
+            <Label Name="ErrorItemCode" Content="  " HorizontalAlignment="Left" Height="30" Margin="470,93,0,0" VerticalAlignment="Top" Width="312" FontSize="10" HorizontalContentAlignment="Center"/>
+            <Label Name="ErrorItemDesc" Content="  " HorizontalAlignment="Left" Height="30" Margin="470,150,0,0" VerticalAlignment="Top" Width="312" FontSize="10" HorizontalContentAlignment="Center"/>
+            <Label Name="ErrorItemCost" Content="  " HorizontalAlignment="Left" Height="30" Margin="470,221,0,0" VerticalAlignment="Top" Width="312" FontSize="10" HorizontalContentAlignment="Center"/>
+        </Grid>
     </Grid>
 
 </Window>

@@ -74,6 +74,16 @@ namespace GroupAssignment.Items
             try
             {
                 ErrorItemCode.Content = ErrorItemCost.Content = ErrorItemDesc.Content = "";
+                if(itemCodeText.Text == "")
+                {
+                    ErrorItemCode.Content = "Name cannot be empty.";
+                    return;
+                }
+                else if(itemDescText.Text == "")
+                {
+                    ErrorItemDesc.Content = "Item description cannot be empty.";
+                    return;
+                }
                 string pKey = itemCodeText.Text;
                 string iDesc = itemDescText.Text;
                 double cost = 0;
@@ -108,6 +118,16 @@ namespace GroupAssignment.Items
             try
             {
                 ErrorItemCode.Content = ErrorItemCost.Content = ErrorItemDesc.Content = "";
+                if (itemCodeText.Text == "")
+                {
+                    ErrorItemCode.Content = "Name cannot be empty.";
+                    return;
+                }
+                else if (itemDescText.Text == "")
+                {
+                    ErrorItemDesc.Content = "Item description cannot be empty.";
+                    return;
+                }
                 string pKey = itemCodeText.Text;
                 string iDesc = itemDescText.Text;
                 double cost = 0;
