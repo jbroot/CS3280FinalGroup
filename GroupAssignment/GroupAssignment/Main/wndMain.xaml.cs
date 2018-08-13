@@ -63,7 +63,7 @@ namespace GroupAssignment.Main
             {
                 logic.displayItemScreen();
                 comboBoxItemSelection.ItemsSource = logic.itemList;
-                refreshInvoice();
+                refreshInvoiceDisplay();
 
             }
             catch (Exception ex)
@@ -76,7 +76,7 @@ namespace GroupAssignment.Main
         /// <summary>
         /// refreshes the current invoice to update the page
         /// </summary>
-        private void refreshInvoice()
+        private void refreshInvoiceDisplay()
         {
             setScreenControls(true);
             //logic.displaySearchScreen();
@@ -110,15 +110,9 @@ namespace GroupAssignment.Main
 
                 if (logic.currentInvoice != null)
                 {
-                    refreshInvoice();
-                    /*labelInvoiceNumberData.Content = logic.currentInvoice.InvoiceNum.ToString();
-                    datePickerInvoiceDate.Text = logic.currentInvoice.InvoiceDate.ToShortDateString();
-                    textBoxTotal.Text = logic.getTotal().ToString();
-                    dataGridLineItems.Items.Refresh();*/
+                    refreshInvoiceDisplay();
                 }
-                //dataGridLineItems.Items.Clear();
                 dataGridLineItems.ItemsSource = logic.lineItems;
-                //dataGridLineItems.Items.Refresh();
                 setScreenControls(false);
             }
             catch (Exception ex)
