@@ -11,6 +11,7 @@ namespace GroupAssignment.Items
     /// </summary>
     public partial class wndItems : Window
     {
+        #region attributes
         /// <summary>
         /// Associates with the class that makes SQL statements
         /// </summary>
@@ -19,6 +20,7 @@ namespace GroupAssignment.Items
         /// Associates with the business logic class
         /// </summary>
         clsItemsLogic myLogic;
+        #endregion
 
         /// <summary>
         /// Initialized the wndItems Window
@@ -34,9 +36,6 @@ namespace GroupAssignment.Items
                 ItemDescTableDataGrid.CanUserAddRows = false;
 
                 RefreshItemDataGrid();
-
-                //for troubleshooting only
-                //test();
             }
             catch (Exception ex)
             {
@@ -181,6 +180,26 @@ namespace GroupAssignment.Items
                     MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
         }
+        /// <summary>
+        /// Steps to take when one selects a row in the datagrid list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ItemDescTableDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if (ItemDescTableDataGrid.SelectedItems.Count <= 0) return;
+                Item row = (Item)ItemDescTableDataGrid.SelectedItems[0];
+                itemCodeText.Text = row.ItemCode;
+                itemDescText.Text = row.ItemDesc;
+                itemCostText.Text = row.ItemCost.ToString();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
 
         /// <summary>
         /// Handles all errors for this class
@@ -199,51 +218,5 @@ namespace GroupAssignment.Items
                 System.IO.File.AppendAllText(@"C:\Error.txt", Environment.NewLine + "HandleError Exception: " + ex.Message);
             }
         }
-
-        private void ItemDescTableDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            try
-            {
-                if (ItemDescTableDataGrid.SelectedItems.Count <= 0) return;
-                Item row = (Item)ItemDescTableDataGrid.SelectedItems[0];
-                itemCodeText.Text = row.ItemCode;
-                itemDescText.Text = row.ItemDesc;
-                itemCostText.Text = row.ItemCost.ToString();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
-            }
-        }
-
-        /*
-        /// <summary>
-        /// Tests code. Delete before final project
-        /// </summary>
-        void test()
-        {
-            //Test SQL
-            myDBLibrary.AddItem("AA", "Test", 100.35);
-            myDBLibrary.UpdateItem("AA", "TestUpdate", 50);
-            myDBLibrary.DeleteItem("AA");
-
-            if (myDBLibrary.AddItem("A", "-1", 60) != -1) throw new Exception("-1 didn't return from used pKey");
-            myDBLibrary.AddItem("AA", "TestOveride", 56);
-            myDBLibrary.DeleteItem("TestOveride", 56);
-
-            //Test getItem()
-            Item testGet = myLogic.GetItem("A");
-
-            //Test itemList
-            string listCheck = "";
-
-            foreach (var Item in myLogic.itemList)
-            {
-                listCheck += Item.ItemCode + "." + Item.ItemDesc + "." + Item.ItemCost.ToString() + "\n";
-            }
-
-            MessageBox.Show(listCheck);
-
-        }*/
     }
 }

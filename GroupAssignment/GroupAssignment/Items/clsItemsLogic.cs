@@ -7,6 +7,7 @@ namespace GroupAssignment.Items
 {
     public class clsItemsLogic
     {
+        #region attributes
         /// <summary>
         /// Associates with the class that makes SQL statemnts
         /// </summary>
@@ -19,6 +20,8 @@ namespace GroupAssignment.Items
         /// Length of list
         /// </summary>
         public int listLength = 0;
+        #endregion
+
         /// <summary>
         /// Default constructor for the clsItemsLogic class
         /// </summary>

@@ -11,6 +11,9 @@ namespace GroupAssignment.Items
         /// </summary>
         ConnectDB db;
 
+        /// <summary>
+        /// Constructs the clsItemsSQL class
+        /// </summary>
         public clsItemsSQL()
         {
             try
@@ -35,6 +38,7 @@ namespace GroupAssignment.Items
             try
             {
                 string result = db.ExecuteScalarSQL("SELECT * FROM ItemDesc WHERE ItemCode = '" + pKey + "';");
+                //if item doesn't exist
                 if (result == "")
                 {
                     return db.ExecuteNonQuery("INSERT INTO ItemDesc (ItemCode, ItemDesc, Cost) VALUES('" + pKey + "','" + ItemDesc + "','" + cost.ToString() + "');");
@@ -86,6 +90,7 @@ namespace GroupAssignment.Items
             {
 
                 string result = db.ExecuteScalarSQL("SELECT * FROM ItemDesc WHERE ItemCode = '" + pKey + "';");
+                //if item is valid
                 if (result != "")
                 {
                     return db.ExecuteNonQuery("UPDATE ItemDesc SET ItemDesc = '" + ItemDesc + "', Cost = '" + cost.ToString() + "' WHERE ItemCode='" + pKey + "';");
