@@ -89,7 +89,7 @@ namespace GroupAssignment.Search
         }
 
         /// <summary>
-        /// Actions to take when invoices combobox selection is changed
+        /// Actions to take when invoice's combobox selection is changed
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
