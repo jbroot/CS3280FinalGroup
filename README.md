@@ -1,7 +1,2 @@
 # CS3280FinalGroup
-0. Sign in to GitHub
-1. Download https://github.com/jbroot/CS3280FinalGroup
-2. Copy and paste your files
-3. Upload and merge
-4. ????
-6. Profit
+Using C# and SQL, we created software that allows a user to update a plane's passengers and seating arrangement using an intuitive user interface.
