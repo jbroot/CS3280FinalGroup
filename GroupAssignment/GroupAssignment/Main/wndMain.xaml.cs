@@ -83,7 +83,7 @@ namespace GroupAssignment.Main
         }
 
         /// <summary>
-        /// Click ent handler for showing the search screen and getting results
+        /// Click event handler for showing the search screen and getting results
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -109,7 +109,7 @@ namespace GroupAssignment.Main
         }
 
         /// <summary>
-        /// detects the change of sleection of an item
+        /// detects the change of selection of an item
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -285,6 +285,10 @@ namespace GroupAssignment.Main
 
                 menuItems.IsEnabled = !buttonAdd.IsEnabled;
                 buttonDelete.IsEnabled = ((logic.currentInvoice != null && logic.currentInvoice.InvoiceNum != 0) ? true : false);
+                if(isEnabled)
+                    lblRemoveItemHint.Visibility = Visibility.Visible;
+                else
+                    lblRemoveItemHint.Visibility = Visibility.Hidden;
             }
             catch (Exception ex)
             {
@@ -319,7 +323,7 @@ namespace GroupAssignment.Main
             {
                 if (comboBoxItemSelection.SelectedItem == null)
                 {
-                    MessageBox.Show("Please select and item to add", "Cannot add item", MessageBoxButton.OK);
+                    MessageBox.Show("Please select an item", "Cannot add item", MessageBoxButton.OK);
                     return;
                 }
 

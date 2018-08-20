@@ -5,29 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GroupAssignment.Search"
         mc:Ignorable="d"
-        Title="Search for Invoice" Height="450" Width="800" Background="#FF428EDA">
+        Title="Select an Invoice" Height="279.52" Width="272.116" Background="#FF428EDA">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="5*"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <DataGrid x:Name="dataGridInvoices" HorizontalAlignment="Stretch" Margin="10,156,10,45" VerticalAlignment="Stretch" ItemsSource="{Binding invoiceList}" Grid.ColumnSpan="2">
-            <DataGrid.Columns>
-                <DataGridTextColumn x:Name="dataGridTextColumnItemCode" Header="Invoice Number" Binding="{Binding invoice.InvoiceNum}" ClipboardContentBinding="{x:Null}"/>
-                <DataGridTextColumn x:Name="dataGridTextColumnItemDesc" Header="Invoice Date" Binding="{Binding invoice.InvoiceDate}" ClipboardContentBinding="{x:Null}"/>
-            </DataGrid.Columns>
-            <DataGridColumnHeader />
-
-        </DataGrid>
-        <ComboBox x:Name="comboBoxInvoices" HorizontalAlignment="Left" Margin="16,35,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="comboBoxInvoices_SelectionChanged"/>
-        <ComboBox HorizontalAlignment="Left" Margin="179,35,0,0" VerticalAlignment="Top" Width="120"  ItemsSource="{Binding invoice.InvoiceNum}"/>
-        <ComboBox HorizontalAlignment="Left" Margin="346,35,0,0" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="buttonSelect" Content="Select" HorizontalAlignment="Right" Margin="0,0,90,10" VerticalAlignment="Bottom" Width="75" Click="buttonSelect_Click" IsDefault="True" Grid.ColumnSpan="2"/>
-        <Button x:Name="buttonCancel" Content="Cancel" HorizontalAlignment="right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" IsCancel="True" Click="buttonCancel_Click" Grid.Column="1"/>
-        <Label x:Name="labelInvoiceNumber" Content="Invoice Number" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="labelDate" Content="Date" HorizontalAlignment="Left" Margin="179,9,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="labelTotalCharge" Content="Total Charge" HorizontalAlignment="Left" Margin="346,9,0,0" VerticalAlignment="Top"/>
-        <TextBox Text="Since Jesse had stopped responding, we were allowed to omit the search window. We added minimal functionality so that you can select an invoice from the in voice number drop down and press select to open it in the main form." HorizontalAlignment="Left"  Margin="16,66,0,0" VerticalAlignment="Top" Height="68" Width="675" TextWrapping="Wrap" Foreground="Red" Grid.ColumnSpan="2"/>
+        <ComboBox x:Name="comboBoxInvoices" HorizontalAlignment="Left" Margin="62,40,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="comboBoxInvoices_SelectionChanged"/>
+        <Button x:Name="buttonSelect" Content="Select" HorizontalAlignment="Right" Margin="0,0,18,35" VerticalAlignment="Bottom" Width="75" Click="buttonSelect_Click" IsDefault="True" RenderTransformOrigin="2.172,-0.907"/>
+        <Button x:Name="buttonCancel" Content="Cancel" HorizontalAlignment="right" Margin="0,0,162,35" VerticalAlignment="Bottom" Width="75" IsCancel="True" Click="buttonCancel_Click" RenderTransformOrigin="3.375,0.597"/>
+        <Label x:Name="labelInvoiceNumber" Content="Invoice Number" HorizontalAlignment="Left" Margin="78,10,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

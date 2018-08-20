@@ -9,7 +9,7 @@
     <Grid>
         <DataGrid Name="ItemDescTableDataGrid" HorizontalAlignment="Left"  Margin="10,10,0,10" VerticalAlignment="Stretch" Width="439" SelectionChanged="ItemDescTableDataGrid_SelectionChanged"  >
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="dataGridTextColumnItemCode" Header="Item Code" Width="*" Binding="{Binding ItemCode}" ClipboardContentBinding="{x:Null}" IsReadOnly="true"/>
+                <DataGridTextColumn x:Name="dataGridTextColumnItemCode" Header="Item Name" Width="*" Binding="{Binding ItemCode}" ClipboardContentBinding="{x:Null}" IsReadOnly="true"/>
                 <DataGridTextColumn Header="Item Description" Width="3*" Binding="{Binding ItemDesc}" ClipboardContentBinding="{x:Null}" IsReadOnly="true"/>
                 <DataGridTextColumn Header="Item Cost" Width="*" Binding="{Binding ItemCost}" ClipboardContentBinding="{x:Null}" IsReadOnly="true"/>
             </DataGrid.Columns>
